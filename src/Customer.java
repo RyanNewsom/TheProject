@@ -1,0 +1,4 @@
+//Goodluck!!
+public class Customer {
+
+}
