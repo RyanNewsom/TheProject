@@ -20,30 +20,35 @@ import javax.swing.JTextField;
  * @version 1
  */
 public class Office {
+	
 	static Image background;
+	
 	public static void main(String[]args){
 		Office office = new Office();
 	}
+	
 	public Office(){
 		JFrame frame = new JFrame("Just another day at the office");
 		JLabel title = new JLabel("Please enter the time for the office simulation in minutes");
 		File file = new File("workaholics.jpg");
 		JTextField titleInput = new JTextField(20);
 		JButton go = new JButton("GO");
-		Font largeFont = new Font("Verdana", 0, 30);
+		Font largeFont = new Font("Verdana", 1, 30);
+		Font mediumFont = new Font("Verdana", 0, 20);
 		//frame.setResizable(false);
 		try {
 			background = ImageIO.read(file);
 		} catch (IOException e) {
 			System.out.println("Image load failed");
-			// TODO Auto-generated catch block;
+			// Some Error Handling in the future
 		}
 		final JPanel j = new IPanel(background);
-		frame.setBounds(350,350,1080,700);
+		frame.setBounds(200,200,1080,700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(j);
 		title.setFont(largeFont);
-		title.setForeground(Color.BLUE);
+		title.setForeground(Color.GRAY);
+		titleInput.setFont(mediumFont);
 		go.setFont(largeFont);
 		j.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -66,7 +71,7 @@ public class Office {
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 0;
-		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.anchor = GridBagConstraints.SOUTH;
 		j.add(titleInput,gbc);
 		//////////////Row 2//////////////////////
 		gbc.weightx = 0.1;
@@ -74,10 +79,8 @@ public class Office {
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		gbc.gridwidth = 0;
-		gbc.anchor = GridBagConstraints.NORTH;
+		gbc.anchor = GridBagConstraints.CENTER;
 		j.add(go,gbc);
-		
-		frame.repaint();
 		frame.setVisible(true);
 	}
 }
