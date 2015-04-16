@@ -7,7 +7,7 @@ public class Time {
 	private double questionTime;
 	private double callTime;
 
-	private void startTimeSim{
+	private void startTimeSim(){
 
 		// 0 seconds
 		startTime = 0;

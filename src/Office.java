@@ -20,9 +20,7 @@ import javax.swing.JTextField;
  * @version 1
  */
 public class Office {
-	
-	static Image background;
-	
+
 	public static void main(String[]args){
 		Office office = new Office();
 	}
@@ -33,8 +31,10 @@ public class Office {
 		File file = new File("workaholics.jpg");
 		JTextField titleInput = new JTextField(20);
 		JButton go = new JButton("GO");
-		Font largeFont = new Font("Verdana", 1, 30);
-		Font mediumFont = new Font("Verdana", 0, 20);
+		Font largeFont = new Font("SANS_SERIF", 1, 34);
+		Font mediumFont = new Font("SANS_SERIF", 0, 20);
+		Color teal = new Color(46, 177, 157);
+		Image background = null;
 		//frame.setResizable(false);
 		try {
 			background = ImageIO.read(file);
@@ -47,7 +47,7 @@ public class Office {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(j);
 		title.setFont(largeFont);
-		title.setForeground(Color.GRAY);
+		title.setForeground(teal);
 		titleInput.setFont(mediumFont);
 		go.setFont(largeFont);
 		j.setLayout(new GridBagLayout());
@@ -84,4 +84,3 @@ public class Office {
 		frame.setVisible(true);
 	}
 }
-
