@@ -14,42 +14,46 @@
 
 public class Time {
 
-	private double currentTime;
-	private double endTime;
-	private double customerDoorTime;
-	private double questionTime;
-	private double customerCallTime;
+	private double currentTime = 0;
+	private double endTime = 3000;
+	private double customerDoorTime = 0;
+	private double questionTime = Double.MAX_VALUE;
+	private double customerCallTime = 0;
+	
+	LinkedListQueue customersWaiting = new New LinkedListQueue(); // LinkedList of customers in line
+	LinkedListQueue customersComplete = new New LinkedListQueue(); // LinkedList of customers complete
 	
 	/**
 	 * main driver of the time keeping class. 
 	 */
 	private void currentTimeSim(){
 		
+		String doorCustomer = "Door Customer";
+		String phoneCustomer = "Phone Customer";
 		customerCallTime = 0;
 		customerDoorTime = 0;
 		questionTime = Double.MAX_VALUE;
 		currentTime = 0;		// 0 seconds
 		endTime = 3000;			// 3000 seconds in 50 minutes
 		
-		while(currentTime <= 3000){
+		while(currentTime < endTime){
 			
 			customerDoorTime = customerDoorTime + doorArrivalPoisson();
 			customerCallTime = currentTime + phoneCallPoisson();
 			
+			if(customerDoorTime < customerCallTime){
+				questionTime = questionTimePoisson();
+				Node customer  = new Node(currentTime, questionTime, doorCustomer);
+				customersWaiting.setTail(customer);
+			}
+			
 			//Add the full question duration to the current if there are no calls scheduled to interrupt
-			if(currentTime + questionTime < customerCallTime){
-				
-				currentTime = currentTime + questionTime;
-				
-				// grab the next customer in out linked list
-				
-				/*---------------------------------------------------------------------------------------------------------------
-				Node customer = head.getNext();
-				
-				if(customer != null){
-					questionTime = customer.getQuestionTime();
+			if(currentTime + questionTime < customerCallTime){	
+				currentTime = currentTime + questionTime;	
+				Node newCustomer = customersWaiting.getHead(); // grab the next customer in out linked list
+				if(newCustomer != null){
+					questionTime = newCustomer.getQuestionTime();
 				}
-				---------------------------------------------------------------------------------------------------------------*/
 
 			}
 			
@@ -58,16 +62,9 @@ public class Time {
 				questionTime = questionTimePoisson();
 				
 				// Node constructor taking the parameters (int timeEnteredDoor, double questionTime)
-				
-				/*---------------------------------------------------------------------------------------------------------------
 				Node customer = new Node(currentTime, questionTime);
-				---------------------------------------------------------------------------------------------------------------*/
-				
-				// Method in Linked list class to add customer object to END of the line;
-				
-				/*---------------------------------------------------------------------------------------------------------------
+
 				customer.setTail(); 
-				---------------------------------------------------------------------------------------------------------------*/
 				
 				//add customerDoorTime to currentTime
 				currentTime = currentTime + customerDoorTime;
@@ -113,6 +110,9 @@ public class Time {
 	
 	private double nextEventTime(){
 		
+		if(customerDoorTime < customerCallTime){
+			return customerDoorTime;
+		}
 		
 		return customerCallTime;
 	}
