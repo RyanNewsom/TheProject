@@ -42,11 +42,14 @@ public class Time {
 				currentTime = currentTime + questionTime;
 				
 				// grab the next customer in out linked list
+				
+				/*---------------------------------------------------------------------------------------------------------------
 				Node customer = head.getNext();
 				
 				if(customer != null){
 					questionTime = customer.getQuestionTime();
 				}
+				---------------------------------------------------------------------------------------------------------------*/
 
 			}
 			
@@ -55,9 +58,16 @@ public class Time {
 				questionTime = questionTimePoisson();
 				
 				// Node constructor taking the parameters (int timeEnteredDoor, double questionTime)
+				
+				/*---------------------------------------------------------------------------------------------------------------
 				Node customer = new Node(currentTime, questionTime);
+				---------------------------------------------------------------------------------------------------------------*/
+				
 				// Method in Linked list class to add customer object to END of the line;
+				
+				/*---------------------------------------------------------------------------------------------------------------
 				customer.setTail(); 
+				---------------------------------------------------------------------------------------------------------------*/
 				
 				//add customerDoorTime to currentTime
 				currentTime = currentTime + customerDoorTime;
@@ -75,9 +85,16 @@ public class Time {
 				questionTime = questionTimePoisson();
 				
 				// Node construstor taking the parameters (int timeEnteredDoor, double questionTime)
+				
+				/*---------------------------------------------------------------------------------------------------------------
 				Node customer = new Node(currentTime, questionTime);
+				---------------------------------------------------------------------------------------------------------------*/
+				
 				// Method in Linked list class to add customer object to FRONT of the line;
+				
+				/*---------------------------------------------------------------------------------------------------------------
 				customer.setHead(); 
+				---------------------------------------------------------------------------------------------------------------*/
 				
 				//add customerDoorTime to currentTime
 				currentTime = currentTime + customerCallTime;
