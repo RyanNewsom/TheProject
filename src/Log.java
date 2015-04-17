@@ -1,9 +1,12 @@
 import java.awt.LayoutManager;
+import java.util.LinkedList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import com.sun.corba.se.impl.orbutil.graph.Node;
 
 /**
  * This class will provide a GUI showing how the day at the office went and everything that happened.
@@ -11,10 +14,16 @@ import javax.swing.JTextArea;
  * @version 1
  */
 public class Log {
-	public static void main(String[]args){
-		Log theLog = new Log();
+	LinkedList before;
+	LinkedList atEndTime;
+	
+	public Log(LinkedList before, LinkedList atEndTime){
+		this.before = before;
+		this.atEndTime = atEndTime;
 	}
-	public Log(){
+	
+	public void createLog()
+	{
 		JFrame frame = new JFrame("Today at the office...");
 		//JPanel panel = new IPanel();
 		JTextArea textArea = new JTextArea("Results go here.");
@@ -31,6 +40,28 @@ public class Log {
 		frame.setVisible(true);
 		frame.setBounds(100, 100, 800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		boolean empty = false;
+		String contents = "";
+		do{
+			Object temp = before.remove();
+			if(temp!=null){
+				String tempS = temp.toString();
+				contents += "\n" + temp.toString();
+			}
+			else empty = true;
+		}while(empty);
 		
+		empty = false;
+		
+		do{
+			Object temp = atEndTime.remove();
+			if(temp!=null) {
+				String tempS = temp.toString();
+				contents += "\n" + temp.toString();
+				}
+			else empty = true;
+		}while(empty);
+		
+		textArea.setText(contents);
 	}
 }

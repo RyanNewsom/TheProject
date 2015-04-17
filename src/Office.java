@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -15,7 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 /**
- * This class will facilitate running the program itself and bring everything together
+ * This class will facilitate running the program itself and bring everything together. The flow will be as such
+ * 1) Kris will keep track of the times and 
  * @author Ryan Newsom
  * @version 1
  */
@@ -57,7 +59,9 @@ public class Office {
 		go.setFont(largeFont);
 		go.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//RESERVED will initiate running the program for X minutes
+				runIt(Integer.parseInt(titleInput.getText()));
+				
+				//
 			}	
 		});
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -86,5 +90,18 @@ public class Office {
 		gbc.anchor = GridBagConstraints.CENTER;
 		j.add(go,gbc);
 		frame.setVisible(true);
+	}
+	
+	public void runIt(int runTime){
+		LinkedList list1 = new LinkedList();
+		LinkedList listAfterRun = new LinkedList();
+		/*
+		Time runIt = new Time(runTime);
+		list1 = runIt.getLinkedList2()
+		list2 = runIt.getLinkedList1();
+		//Time to print out all the customer information per Gordons specs to the Log GUI.
+		Log theLog = new Log(list1, list2);
+		theLog.createLog();
+		*/
 	}
 }
