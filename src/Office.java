@@ -17,7 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 /**
  * This class will facilitate running the program itself and bring everything together. The flow will be as such
- * 1) Kris will keep track of the times and 
+ * 1) Kris will keep track of the times and create all the customer objects using two LinkedLists.
+ * 2) Once the Time class has ran through the simulation, I will grab both linked lists from it.
+ * 3) Then, the log class will be called and the timline of events will be printed in the Log's JFrame.
  * @author Ryan Newsom
  * @version 1
  */
