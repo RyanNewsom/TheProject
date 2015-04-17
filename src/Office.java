@@ -35,7 +35,7 @@ public class Office {
 		Font mediumFont = new Font("SANS_SERIF", 0, 20);
 		Color teal = new Color(46, 177, 157);
 		Image background = null;
-		//frame.setResizable(false);
+		
 		try {
 			background = ImageIO.read(file);
 		} catch (IOException e) {
@@ -43,20 +43,24 @@ public class Office {
 			// Some Error Handling in the future
 		}
 		final JPanel j = new IPanel(background);
+		//frame.setResizable(false);
 		frame.setBounds(200,200,1080,700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(j);
+		
+		j.setLayout(new GridBagLayout());
+		
 		title.setFont(largeFont);
 		title.setForeground(teal);
 		titleInput.setFont(mediumFont);
+		
 		go.setFont(largeFont);
-		j.setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
 		go.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				//RESERVED will initiate running the program for X minutes
 			}	
 		});
+		GridBagConstraints gbc = new GridBagConstraints();
 		//////////////Row 0//////////////////////
 		gbc.weightx = 0.1;
 		gbc.weighty = 0.15;
