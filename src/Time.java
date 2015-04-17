@@ -57,26 +57,29 @@ public class Time {
 		currentTime = 0;		// 0 seconds
 		
 		while(currentTime < endTime){
-			
+			Customer customer = null;
 			nextEvent(); // get next customer type
 			
 			if(customerType == "Door Customer"){
 				
 				currentTime = currentTime + customerDoorTime;
 				questionTime = questionTimePoisson();
-				Customer customer  = new Customer(customerType, currentTime, questionTime, 10, 10);
-				customersWaiting.add(customer);
+				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 10, 10);
+				customersWaiting.add(newCustomer);
+				if(customer == null){
+					customer = customersWaiting.remove(0);
+				}
 				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
 				if((currentTime + questionTime) > customerCallTime){
-					Double remainingQuestionTime = (customerCallTime - (currentTime + questionTime)); //get remaining question time
+					int remainingQuestionTime = (int)(customerCallTime - (currentTime + questionTime)); //get remaining question time
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
-					customer.setQuestionTime(remainingQuestionTime); // set customer question time as remaning question time
+					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerDoorTime = customerDoorTime + doorArrivalPoisson();
 					continue;
 				}
-				customer = customersWaiting.remove(0);
 				customersComplete.add(customer); // add customer to list of completed customers
+				customer = customersWaiting.remove(0);
 				customerDoorTime = customerDoorTime + doorArrivalPoisson();
 				
 			}
@@ -86,19 +89,20 @@ public class Time {
 				
 				currentTime = currentTime + customerCallTime;
 				questionTime = questionTimePoisson();
-				Customer customer  = new Customer(customerType, currentTime, questionTime, 10, 10);
-				customersWaiting.add(customer);
+				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 10, 10);
+				customersWaiting.add(0, newCustomer);
+				customer = newCustomer;
 				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
 				if((currentTime + questionTime) > customerCallTime){
-					Double remainingQuestionTime = (customerCallTime - (currentTime + questionTime)); //get remaining question time
+					int remainingQuestionTime = (int)(customerCallTime - (currentTime + questionTime)); //get remaining question time
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
-					customer.setQuestionTime(remainingQuestionTime); // set customer question time as remaning question time
+					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerCallTime = customerCallTime + phoneCallPoisson();
 					continue;
 				}
-				customer = customersWaiting.remove(0);
 				customersComplete.add(customer); // add customer to list of completed customers
+				customer = customersWaiting.remove(0);
 				customerCallTime = customerCallTime + phoneCallPoisson();
 				
 			}
