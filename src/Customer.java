@@ -42,7 +42,7 @@ public class Customer {
 		this.startTime = startTime;
 		this.answerTime = answerTime;
 		phrase = Message.getQuestion(question);// Generates a random int which will allow for a random question to be returned
-		answer = Message.getAnswer(question);
+		answer = Message.getAnswer(question);// Generates the appropriate answer for the question
 		this.priority = prior;
 		this.lineLength = lineLength;
 	}
