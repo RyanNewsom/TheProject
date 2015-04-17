@@ -15,7 +15,7 @@ private Image             imageOrg         = null;
 private Image             image            = null;
 {
     addComponentListener(new ComponentAdapter() {
-        @Override
+        //@Override
         public void componentResized(final ComponentEvent e) {
             final int w = IPanel.this.getWidth();
             final int h = IPanel.this.getHeight();
@@ -30,7 +30,7 @@ public IPanel(final Image i) {
     image = i;
 }
 
-@Override
+//@Override
 public void paintComponent(final Graphics g) {
     super.paintComponent(g);
     if (image != null)
