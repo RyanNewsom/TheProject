@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /**
  * 
  * This is the class that keeps track of the overall simulation time and when events occur. When a customer comes in or calls, I create a new
@@ -15,92 +17,89 @@
 public class Time {
 
 	private double currentTime = 0;
-	private double endTime = 3000;
+	private double endTime;
 	private double customerDoorTime = 0;
 	private double questionTime = Double.MAX_VALUE;
 	private double customerCallTime = 0;
+	String customerType;
 	
-	LinkedListQueue customersWaiting = new New LinkedListQueue(); // LinkedList of customers in line
-	LinkedListQueue customersComplete = new New LinkedListQueue(); // LinkedList of customers complete
+	LinkedList<Customer> customersWaiting = new LinkedList<Customer>(); // LinkedList of customers in line
+	LinkedList<Customer> customersComplete = new LinkedList<Customer>(); // LinkedList of customers complete
+	
+	/**
+	 * Blank constructor for time class
+	 */
+	public Time(){
+		
+	}
+	
+	/**
+	 * Constructor that takes an int for the simulation endTime
+	 * 
+	 * @param endTime - Length of the simulation time in minutes, converts it to seconds in the constructor
+	 */
+	public Time(int endTime){
+		
+		this.endTime = endTime * 60; // convert minutes to seconds
+		Time time = new Time();
+		time.currentTimeSim();
+		
+	}
 	
 	/**
 	 * main driver of the time keeping class. 
 	 */
 	private void currentTimeSim(){
 		
-		String doorCustomer = "Door Customer";
-		String phoneCustomer = "Phone Customer";
-		customerCallTime = 0;
-		customerDoorTime = 0;
+		customerCallTime = phoneCallPoisson();
+		customerDoorTime = doorArrivalPoisson();
 		questionTime = Double.MAX_VALUE;
 		currentTime = 0;		// 0 seconds
-		endTime = 3000;			// 3000 seconds in 50 minutes
 		
 		while(currentTime < endTime){
 			
-			customerDoorTime = customerDoorTime + doorArrivalPoisson();
-			customerCallTime = currentTime + phoneCallPoisson();
+			nextEvent(); // get next customer type
 			
-			if(customerDoorTime < customerCallTime){
-				questionTime = questionTimePoisson();
-				Node customer  = new Node(currentTime, questionTime, doorCustomer);
-				customersWaiting.setTail(customer);
-			}
-			
-			//Add the full question duration to the current if there are no calls scheduled to interrupt
-			if(currentTime + questionTime < customerCallTime){	
-				currentTime = currentTime + questionTime;	
-				Node newCustomer = customersWaiting.getHead(); // grab the next customer in out linked list
-				if(newCustomer != null){
-					questionTime = newCustomer.getQuestionTime();
-				}
-
-			}
-			
-			if(customerDoorTime < customerCallTime){
+			if(customerType == "Door Customer"){
 				
-				questionTime = questionTimePoisson();
-				
-				// Node constructor taking the parameters (int timeEnteredDoor, double questionTime)
-				Node customer = new Node(currentTime, questionTime);
-
-				customer.setTail(); 
-				
-				//add customerDoorTime to currentTime
 				currentTime = currentTime + customerDoorTime;
+				questionTime = questionTimePoisson();
+				Customer customer  = new Customer(customerType, currentTime, questionTime, 10, 10);
+				customersWaiting.add(customer);
 				
-				//add current customer door time with a new random, to get time next customer walks through the door.
+				//This loop is if a customer is scheduled to call while a customer is in line. 
+				if((currentTime + questionTime) > customerCallTime){
+					Double remainingQuestionTime = (customerCallTime - (currentTime + questionTime)); //get remaining question time
+					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
+					customer.setQuestionTime(remainingQuestionTime); // set customer question time as remaning question time
+					customerDoorTime = customerDoorTime + doorArrivalPoisson();
+					continue;
+				}
+				customer = customersWaiting.remove(0);
+				customersComplete.add(customer); // add customer to list of completed customers
 				customerDoorTime = customerDoorTime + doorArrivalPoisson();
 				
-				//go to top of the loop
-				continue;
-				
 			}
 			
-			if(customerCallTime <= customerDoorTime){
+			
+			if(customerType == "Phone Customer"){
 				
-				questionTime = questionTimePoisson();
-				
-				// Node construstor taking the parameters (int timeEnteredDoor, double questionTime)
-				
-				/*---------------------------------------------------------------------------------------------------------------
-				Node customer = new Node(currentTime, questionTime);
-				---------------------------------------------------------------------------------------------------------------*/
-				
-				// Method in Linked list class to add customer object to FRONT of the line;
-				
-				/*---------------------------------------------------------------------------------------------------------------
-				customer.setHead(); 
-				---------------------------------------------------------------------------------------------------------------*/
-				
-				//add customerDoorTime to currentTime
 				currentTime = currentTime + customerCallTime;
+				questionTime = questionTimePoisson();
+				Customer customer  = new Customer(customerType, currentTime, questionTime, 10, 10);
+				customersWaiting.add(customer);
 				
-				//add current customer door time with a new random, to get time next customer walks through the door.
-				customerCallTime = customerCallTime + doorArrivalPoisson();
-				
-				//go to top of the loop
-				continue;
+				//This loop is if a customer is scheduled to call while a customer is in line. 
+				if((currentTime + questionTime) > customerCallTime){
+					Double remainingQuestionTime = (customerCallTime - (currentTime + questionTime)); //get remaining question time
+					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
+					customer.setQuestionTime(remainingQuestionTime); // set customer question time as remaning question time
+					customerCallTime = customerCallTime + phoneCallPoisson();
+					continue;
+				}
+				customer = customersWaiting.remove(0);
+				customersComplete.add(customer); // add customer to list of completed customers
+				customerCallTime = customerCallTime + phoneCallPoisson();
 				
 			}
 			
@@ -108,12 +107,14 @@ public class Time {
 		
 	}
 	
-	private double nextEventTime(){
+	private double nextEvent(){
 		
 		if(customerDoorTime < customerCallTime){
+			customerType = "Door Customer";
 			return customerDoorTime;
+			
 		}
-		
+		customerType = "Phone Customer";
 		return customerCallTime;
 	}
 	
@@ -160,6 +161,17 @@ public class Time {
 		p = 45.0 *  -Math.log(U);
 		return p;
 
+	}
+	
+	private LinkedList customersRemaining() {
+	
+		return customersWaiting;
+		
+	}
+	
+	private LinkedList customersComplete(){
+		
+		return customersComplete;
 	}
 	
 }
