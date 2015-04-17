@@ -23,7 +23,7 @@ public class Time {
 	/**
 	 * main driver of the time keeping class. 
 	 */
-	private void startTimeSim(){
+	private void currentTimeSim(){
 		
 		customerCallTime = 0;
 		customerDoorTime = 0;
@@ -109,6 +109,12 @@ public class Time {
 			
 		}
 		
+	}
+	
+	private double nextEventTime(){
+		
+		
+		return customerCallTime;
 	}
 	
 	/**

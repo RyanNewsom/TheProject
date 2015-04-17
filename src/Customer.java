@@ -47,3 +47,4 @@ public class Customer {
 		this.lineLength = lineLength;
 	}
 }
+
