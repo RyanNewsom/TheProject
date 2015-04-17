@@ -18,6 +18,8 @@ public class Customer {
 	String answerTime;
 	/** The customers question */
 	String phrase;
+	/** The answer the customer was given */
+	String answer;
 	/** The customers priority */
 	int priority; 
 	/** The length of the line after the customer is done with their question*/
@@ -34,11 +36,13 @@ public class Customer {
 	 */
 	public Customer(String name, String type, String sTime, String answerTime, int prior, int lineLength){
 		Random rand = new Random();// Will be used to generate a random integer
+		int question = rand.nextInt(14);
 		this.name = name;
 		this.type = type;
 		this.startTime = startTime;
 		this.answerTime = answerTime;
-		phrase = Message.getQuestion(rand.nextInt((14 - 0) + 1) + 0);// Generates a random int which will allow for a random question to be returned
+		phrase = Message.getQuestion(question);// Generates a random int which will allow for a random question to be returned
+		answer = Message.getAnswer(question);
 		this.priority = prior;
 		this.lineLength = lineLength;
 	}

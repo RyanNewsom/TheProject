@@ -10,7 +10,7 @@ public class Message {
 	 * @return - The question the customer has
 	 */
 	public static String getQuestion(int theQuestion){
-		String question = "your index is out of bounds";
+		String question = "your ? index is out of bounds";
 		switch(theQuestion){
 			case 0 :question = "Blondes or burnettes?";
 					break;
@@ -45,5 +45,43 @@ public class Message {
 		}
 		return question;
 	}
+		public static String getAnswer(int theAnswer){
+			String answer = "Your answer index is out of bounds";
+			switch(theAnswer){
+				case 0 :answer = "Well... that depends on many things";
+						break;
+				case 1:	answer = "We are located at 12345 swift circle?";
+						break;
+				case 2:	answer = "I like teal or any shade of blue";
+						break;
+				case 3: answer = "Get the android turbo, you won't be dissapointed";
+						break;
+				case 4: answer = "$400. It's overpriced, I know.";
+						break;
+				case 5: answer = "Black, silver, pink, green, red, we have it all";
+						break;
+				case 6: answer = "Well, android is more customizable, but apple is trendy.";
+						break;
+				case 7: answer = "Only the best, a Droid Turbo.";
+						break;
+				case 8: answer = "...(crickets)";
+						break;
+				case 9: answer = "Too damn long... I mean 6";
+						break;
+				case 10:answer = "I'm pretty sure that's you";
+						break;
+				case 11:answer = "Anything not made by Apple";
+						break;
+				case 12:answer = "I love to golf, paintball is fun too";
+						break;
+				case 13:answer = "Five guys";
+						break;
+				case 14:answer = "To support small business... merica";
+						break;
+				}
+			return answer;
+		
+		
+		}
 }
 

@@ -1,4 +1,8 @@
-
+/**
+ * 
+ * @author Ryan
+ *
+ */
 public class Secratery {
 	
 	private void customerResponse(int linkedListSize){
