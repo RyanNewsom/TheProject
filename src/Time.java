@@ -42,8 +42,7 @@ public class Time {
 		
 		this.endTime = endTime * 60; // convert minutes to seconds
 		Time time = new Time();
-		time.currentTimeSim();
-		
+		time.currentTimeSim();	
 	}
 	
 	/**
@@ -167,13 +166,13 @@ public class Time {
 
 	}
 	
-	private LinkedList customersRemaining() {
+	protected LinkedList customersRemaining() {
 	
 		return customersWaiting;
 		
 	}
 	
-	private LinkedList customersComplete(){
+	protected LinkedList customersComplete(){
 		
 		return customersComplete;
 	}

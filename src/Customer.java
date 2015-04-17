@@ -57,5 +57,12 @@ public class Customer {
 	public int getRemaining(){
 		return remainingTime;
 	}
+	public String toString(){
+		String theString;
+		theString = ("");
+		return theString;
+	}
 }
+
+
 
