@@ -13,9 +13,11 @@ public class Customer {
 	/** Phone-call or walk-in */
 	String type;
 	/** The time the customer called or walked in */
-	String startTime;
+	double startTime;
 	/** The time their question was answered */
-	String answerTime;
+	double answerTime;
+	/** The time remaining for the customers question to be answered */
+	int remainingTime;
 	/** The customers question */
 	String phrase;
 	/** The answer the customer was given */
@@ -34,17 +36,26 @@ public class Customer {
 	 * @param prior - priority of the customer
 	 * @param lineLength - After the customer has their question answered and leaves i.e. don't include this customer in the count
 	 */
-	public Customer(String type, String sTime, String answerTime, int prior, int lineLength){
+	public Customer(String type, double sTime, double answerTime, int remainingTime, int prior, int lineLength){
 		Random rand = new Random();// Will be used to generate a random integer
 		int question = rand.nextInt(14);
 		name = Message.getName(rand.nextInt(14));
 		this.type = type;
 		this.startTime = startTime;
 		this.answerTime = answerTime;
+		this.remainingTime = remainingTime;
 		phrase = Message.getQuestion(question);// Generates a random int which will allow for a random question to be returned
 		answer = Message.getAnswer(question);// Generates the appropriate answer for the question
 		this.priority = prior;
 		this.lineLength = lineLength;
+	}
+	
+	public void setRemaining(int remainingTime){
+		this.remainingTime = remainingTime;
+	}
+	
+	public int getRemaining(){
+		return remainingTime;
 	}
 }
 
