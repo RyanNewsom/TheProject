@@ -34,10 +34,10 @@ public class Customer {
 	 * @param prior - priority of the customer
 	 * @param lineLength - After the customer has their question answered and leaves i.e. don't include this customer in the count
 	 */
-	public Customer(String name, String type, String sTime, String answerTime, int prior, int lineLength){
+	public Customer(String type, String sTime, String answerTime, int prior, int lineLength){
 		Random rand = new Random();// Will be used to generate a random integer
 		int question = rand.nextInt(14);
-		this.name = name;
+		name = Message.getName(rand.nextInt(14));
 		this.type = type;
 		this.startTime = startTime;
 		this.answerTime = answerTime;

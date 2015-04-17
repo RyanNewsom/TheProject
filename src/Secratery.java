@@ -1,6 +1,6 @@
 /**
  * 
- * @author Ryan
+ * @author 
  *
  */
 public class Secratery {

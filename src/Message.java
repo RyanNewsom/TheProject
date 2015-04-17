@@ -80,6 +80,63 @@ public class Message {
 						break;
 				}
 			return answer;
+		}
+		
+		public static String getName(int randomInt){
+			String name = "Your name index is out of bounds";
+			switch(randomInt){
+				case 0 :name = "Samantha";
+						break;
+				case 1:	name = "Cathleen";
+						break;
+				case 2:	name = "Riwanda";
+						break;
+				case 3: name = "Lafonda";
+						break;
+				case 4: name = "Sarah";
+						break;
+				case 5: name = "Brittany";
+						break;
+				case 6: name = "Anastasia";
+						break;
+				case 7: name = "Piper";
+						break;
+				case 8: name = "Candice";
+						break;
+				case 9: name = "Shaniqua";
+						break;
+				case 10:name = "Candy";
+						break;
+				case 11:name = "Aurora";
+						break;
+				case 12:name = "Lexus";
+						break;
+				case 13:name = "Tammy";
+						break;
+				case 14:name = "Veronica";
+						break;
+				case 15:name = "Brittany";
+						break;
+				case 16:name = "Elizabeth";
+						break;
+				case 17:name = "Karen";
+						break;
+				case 18:name = "Amanda";
+						break;
+				case 19:name = "Strawberries";
+						break;
+				case 20:name = "Mackenzie";
+						break;
+				case 21:name = "Helen";
+						break;
+				case 22:name = "Martha";
+						break;
+				case 23:name = "Trish";
+						break;
+				case 24:name = "Bieber";
+						break;
+				}
+			return name;
 		
 		
 		}
