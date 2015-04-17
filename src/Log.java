@@ -7,7 +7,8 @@ import javax.swing.JPanel;
  * @version 1
  */
 public class Log {
-	JFrame fame = new JFrame();
+	JFrame fame = new JFrame("Today at the office...");
 	JPanel panel = new JPanel();
+	
 	
 }

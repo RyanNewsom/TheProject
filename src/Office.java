@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 /**
- * This class will facilitate running the program itself
+ * This class will facilitate running the program itself and bring everything together
  * @author Ryan Newsom
  * @version 1
  */
@@ -26,7 +26,7 @@ public class Office {
 	}
 	
 	public Office(){
-		JFrame frame = new JFrame("Just another day at the office");
+		JFrame frame = new JFrame("Just another day at the office...");
 		JLabel title = new JLabel("Please enter the time for the office simulation in minutes");
 		File file = new File("workaholics.jpg");
 		JTextField titleInput = new JTextField(20);
