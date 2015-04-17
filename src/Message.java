@@ -1,23 +1,29 @@
 /**
- * This class will create formatted messages for the log printout
- * They keep track of someone comes in the door or makes a phone call or has finally gotten her question answered. 
+ * This class will keep track of what's going on at different times. It will also be used for the Log class. Create a Message object whenever an event happens and record ALL FIELDS.
+ * It will keep track of the events including - when someone comes in the door OR makes a phone call OR has finally gotten their question answered. 
  * Each message should indicate at what time the event happened, to whom it happened (number each customer from 1 to however high they reach), 
  * and how long the line in the office is after the event. (The person currently being served counts as a member of the line, as do waiting phone callers). 
  * @author Ryan Newsom
  *
  */
 public class Message {
-	String time; //The time the event STARTED at
-	String eventType;
-	String timeEventStart;
-	int lineLength;
+	String startTime;// The startTime the event STARTED at
+	String eventType;// The type of the event(phone call, in-person, question answered)
+	int lineLength;// The length of the line AFTER the event
+	int place;// The customers place in line
 	
-	public void setTime(String time){
-		this.time = time;
+	public Message(String startTime, String eventType, int lineLength, int place){
+		this.startTime = startTime;
+		this.eventType = eventType;
+		this.lineLength = lineLength;
+		this.place = place;
+	}
+	public void setstartTime(String startTime){
+		this.startTime = startTime;
 	}
 	
-	public String getTime(){
-		return time;
+	public String getstartTime(){
+		return startTime;
 		
 	}
 	
@@ -29,20 +35,20 @@ public class Message {
 		return eventType;
 	}
 	
-	public void setTimeEventStart(){
-		this.timeEventStart = timeEventStart;
-	}
-	
-	public String getTimeEventStart(){
-		return timeEventStart;
-	}
-	
 	public void setLineLength(int lineLength){
 		this.lineLength = lineLength;
 	}
 	
 	public int getLineLength(){
 		return lineLength;
+	}
+	
+	public void setPlace(int place){
+		this.place = place;
+	}
+	
+	public int getPlace(){
+		return place;
 	}
 	
 }
