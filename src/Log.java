@@ -43,8 +43,9 @@ public class Log {
 		boolean empty = false;
 		String contents = "";
 		do{
-			Object temp = before.remove();
+			Object temp = before.peek();
 			if(temp!=null){
+				temp = before.remove();
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
 			}
@@ -54,8 +55,9 @@ public class Log {
 		empty = false;
 		
 		do{
-			Object temp = atEndTime.remove();
+			Object temp = atEndTime.peek();
 			if(temp!=null) {
+				temp = atEndTime.remove();
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
 				}
@@ -63,5 +65,6 @@ public class Log {
 		}while(empty);
 		
 		textArea.setText(contents);
+		System.out.println("dsdfsdf");
 	}
 }

@@ -39,7 +39,7 @@ public class Customer {
 	public Customer(String type, double sTime, double answerTime, int remainingTime, int prior, int lineLength){
 		Random rand = new Random();// Will be used to generate a random integer
 		int question = rand.nextInt(14);
-		name = Message.getName(rand.nextInt(14));
+		name = Message.getName(rand.nextInt(24));
 		this.type = type;
 		this.startTime = startTime;
 		this.answerTime = answerTime;
