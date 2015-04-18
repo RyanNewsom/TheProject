@@ -14,14 +14,24 @@ import com.sun.corba.se.impl.orbutil.graph.Node;
  * @version 1
  */
 public class Log {
-	LinkedList before;
+	/** This linked list contains all the customers that had questions that were answered */
+	LinkedList before; 
+	/** This linked list contains all the customers that are still in line after the office simulation */
 	LinkedList atEndTime;
 	
+	/**
+	 * Creates a log which will need to access information from two separate Linked Lists
+	 * @param before - all the customers that had questions that were answered
+	 * @param atEndTime - all the customers who are still in line after the office simulation ends 
+	 */
 	public Log(LinkedList before, LinkedList atEndTime){
 		this.before = before;
 		this.atEndTime = atEndTime;
 	}
 	
+	/**
+	 * This method creates the gui inside the JFrame and will desploy all the customers information for the linked lists.
+	 */
 	public void createLog()
 	{
 		JFrame frame = new JFrame("Today at the office...");
@@ -40,6 +50,7 @@ public class Log {
 		frame.setVisible(true);
 		frame.setBounds(100, 100, 800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		boolean empty = false;
 		String contents = "";
 		do{
@@ -53,7 +64,7 @@ public class Log {
 			else empty = false;
 		}while(empty);
 		
-		empty = true;
+		empty = true; // reset the boolean
 		
 		do{
 			Object temp = atEndTime.peek();
