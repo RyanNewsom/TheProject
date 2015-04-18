@@ -28,7 +28,10 @@ public class Office {
 	public static void main(String[]args){
 		Office office = new Office();
 	}
-	
+	/**
+	 * Displays the GUI's and allows for the user to enter in a time they would like to run the office 
+	 * simulation for.
+	 */
 	public Office(){
 		JFrame frame = new JFrame("Just another day at the office...");
 		JLabel title = new JLabel("Please enter the time for the office simulation in minutes");
@@ -93,7 +96,10 @@ public class Office {
 		j.add(go,gbc);
 		frame.setVisible(true);
 	}
-	
+	/**
+	 * 
+	 * @param runTime - the amount of time to simulate the office in minutes
+	 */
 	public void runIt(int runTime){
 		LinkedList list1 = new LinkedList();
 		LinkedList listAfterRun = new LinkedList();

@@ -49,14 +49,24 @@ public class Customer {
 		this.priority = prior;
 		this.lineLength = lineLength;
 	}
-	
+	/**
+	 * Set the time left in order for the question to be answered
+	 * @param remainingTime - the time left to answer the question
+	 */
 	public void setRemaining(int remainingTime){
 		this.remainingTime = remainingTime;
 	}
-	
+	/**
+	 * Get's the remaining time for the customer's question to be answered
+	 * @return - the time left for the customer to have their question answered
+	 */
 	public int getRemaining(){
 		return remainingTime;
 	}
+	
+	/**
+	 * Formats all the information of the customer so it can be easily obtained and used 
+	 */
 	public String toString(){
 		String theString;
 		theString = (name + ":" + type + ":" + "start-time:" + startTime + "answer-time:" + answerTime + "asked " + phrase + "and the Secretar responded with " + answer + "and the line was " + lineLength + "long after.");

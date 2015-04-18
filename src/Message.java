@@ -1,5 +1,5 @@
 /**
- * This class will contain possible questions and answers for the customer and secretary
+ * This class will contain possible questions and answers for the customer and secretary as well as randomly generated names
  * @author Ryan Newsom
  * @version 2
  */
@@ -45,6 +45,11 @@ public class Message {
 		}
 		return question;
 	}
+	/**
+	 * Will return the corresponding answer with the appropriate question for the customer
+	 * @param theAnswer - the int that matches the randomly generate question
+	 * @return - the correct answer that goes with a certain question
+	 */
 		public static String getAnswer(int theAnswer){
 			String answer = "Your answer index is out of bounds";
 			switch(theAnswer){
@@ -81,7 +86,11 @@ public class Message {
 				}
 			return answer;
 		}
-		
+		/**
+		 * Picks a customer name between int range 0-25 basd off what is passed and returns it
+		 * @param randomInt - a randomly generated int which will pick a name
+		 * @return - a randomly generated name
+		 */
 		public static String getName(int randomInt){
 			String name = "Your name index is out of bounds";
 			switch(randomInt){
