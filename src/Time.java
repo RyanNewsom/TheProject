@@ -70,7 +70,7 @@ public class Time {
 				
 				currentTime = customerDoorTime;
 				questionTime = questionTimePoisson();
-				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 10, 10);
+				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 2, customersWaiting.size());
 				customersWaiting.add(newCustomer);
 				if(customer == null){
 					if(customersWaiting.size() == 0){
@@ -106,7 +106,7 @@ public class Time {
 				currentTime = customerCallTime;
 				customerCallTime = customerCallTime + phoneCallPoisson();
 				questionTime = questionTimePoisson();
-				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 10, 10);
+				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 1, customersWaiting.size());
 				customersWaiting.add(0, newCustomer);
 				customer = newCustomer;
 				

@@ -41,7 +41,7 @@ public class Customer {
 		int question = rand.nextInt(14);
 		name = Message.getName(rand.nextInt(24));
 		this.type = type;
-		this.startTime = startTime;
+		this.startTime = sTime;
 		this.answerTime = answerTime;
 		this.remainingTime = remainingTime;
 		phrase = Message.getQuestion(question);// Generates a random int which will allow for a random question to be returned
