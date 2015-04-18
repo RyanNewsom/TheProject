@@ -133,6 +133,18 @@ public class Time {
 			
 		}
 		
+		/*
+		 * ***Using this for debugging purposes***
+		 * 
+		System.out.println(customersComplete.size());
+		System.out.println(customersWaiting.size());
+		int count = 0;
+		for(int i = 0; i< customersComplete.size(); i++){
+			System.out.println(customersComplete.get(i));
+			count++;
+			System.out.println(count);
+		}
+		*/
 	}
 	
 	/**
