@@ -17,7 +17,7 @@ import java.util.LinkedList;
 public class Time {
 
 	private double currentTime = 0;
-	private double endTime;
+	private double endTime = 0;
 	private double customerDoorTime = 0;
 	private double questionTime = Double.MAX_VALUE;
 	private double customerCallTime = 0;
@@ -38,35 +38,43 @@ public class Time {
 	 * 
 	 * @param endTime - Length of the simulation time in minutes, converts it to seconds in the constructor
 	 */
-	public Time(int endTime){
+	public Time(double endTime){
 		
-		this.endTime = endTime * 60; // convert minutes to seconds
-		Time time = new Time();
-		time.currentTimeSim();	
+		this.endTime = (endTime * 60); // convert minutes to seconds
+		currentTimeSim();	
 	}
 	
 	/**
 	 * main driver of the time keeping class. 
 	 */
 	private void currentTimeSim(){
+
+		System.out.println("Start");
 		
 		customerCallTime = phoneCallPoisson();
 		customerDoorTime = doorArrivalPoisson();
 		questionTime = Double.MAX_VALUE;
 		currentTime = 0;		// 0 seconds
 		
+		System.out.println("Current time is " + currentTime + ", and end time is "+ endTime);
+		
 		while(currentTime < endTime){
+			System.out.println("loop " + currentTime);
+			System.out.println(customersWaiting.size());
 			Customer customer = null;
 			nextEvent(); // get next customer type
 			
 			if(customerType == "Door Customer"){
 				
-				currentTime = currentTime + customerDoorTime;
+				System.out.println("Door customer");
+				
+				currentTime = customerDoorTime;
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 10, 10);
 				customersWaiting.add(newCustomer);
 				if(customer == null){
-					customer = customersWaiting.remove(0);
+					customer = customersWaiting.remove();
+					System.out.println("customer");
 				}
 				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
@@ -75,22 +83,29 @@ public class Time {
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerDoorTime = customerDoorTime + doorArrivalPoisson();
+					
+					System.out.println("Door customer interrupted");
+					
 					continue;
 				}
 				customersComplete.add(customer); // add customer to list of completed customers
 				customer = customersWaiting.remove(0);
 				customerDoorTime = customerDoorTime + doorArrivalPoisson();
 				
+				System.out.println("Door Customer complete");
+				
 			}
 			
 			
 			if(customerType == "Phone Customer"){
 				
-				currentTime = currentTime + customerCallTime;
+				currentTime = customerCallTime;
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 10, 10);
 				customersWaiting.add(0, newCustomer);
 				customer = newCustomer;
+				
+				System.out.println("Phone Customer");
 				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
 				if((currentTime + questionTime) > customerCallTime){
@@ -98,11 +113,15 @@ public class Time {
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerCallTime = customerCallTime + phoneCallPoisson();
+					
+					System.out.println("Phone Customer interrupted");
+					
 					continue;
 				}
 				customersComplete.add(customer); // add customer to list of completed customers
 				customer = customersWaiting.remove(0);
 				customerCallTime = customerCallTime + phoneCallPoisson();
+				System.out.println("Phone Customer complete");
 				
 			}
 			
@@ -110,24 +129,12 @@ public class Time {
 		
 	}
 	
-	private double nextEvent(){
+	private void nextEvent(){
 		
 		if(customerDoorTime < customerCallTime){
 			customerType = "Door Customer";
-			return customerDoorTime;
-			
 		}
 		customerType = "Phone Customer";
-		return customerCallTime;
-	}
-	
-	/**
-	 * @return double of how many seconds have elapsed
-	 */
-	private double getTime(){
-		
-		return currentTime;
-		
 	}
 
 	/**
@@ -137,7 +144,7 @@ public class Time {
 
 		double p,U;
 		U = Math.random();
-		p = 55.0 *  -Math.log(U);
+		p = 155.0 *  -Math.log(U);
 		return p;
 
 	}
@@ -171,7 +178,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers waiting in line
 	 */
-	private LinkedList customersRemaining() {
+	protected LinkedList customersRemaining() {
 	
 		return customersWaiting;
 		
@@ -182,7 +189,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers with questions answered
 	 */
-	private LinkedList customersComplete(){
+	protected LinkedList customersComplete(){
 		
 		return customersComplete;
 	}
