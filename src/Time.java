@@ -88,11 +88,12 @@ public class Time {
 					customerDoorTime = customerDoorTime + doorArrivalPoisson();
 					
 					System.out.println("Door customer interrupted");
-					
+					customer = null;
 					continue;
 				}
 				currentTime = currentTime + customer.getRemaining();
-				customersComplete.add(customer); // add customer to list of completed customers
+				customer.setAnswerTime(currentTime);
+				//customersComplete.add(customer); // add customer to list of completed customers
 
 				customerDoorTime = customerDoorTime + doorArrivalPoisson();
 				
@@ -120,15 +121,20 @@ public class Time {
 					customerCallTime = customerCallTime + phoneCallPoisson();
 					
 					System.out.println("Phone Customer interrupted");
-					
+					customer = null;
 					continue;
 				}
 				currentTime = currentTime + customer.getRemaining();
-				customersComplete.add(customer); // add customer to list of completed customers
+				customer.setAnswerTime(currentTime);
+				//customersComplete.add(customer); // add customer to list of completed customers
 
 				customerCallTime = customerCallTime + phoneCallPoisson();
 				System.out.println("Phone Customer complete");
 				
+			}
+			
+			if(customer != null){
+				customersComplete.add(customer); // add customer to list of completed customers
 			}
 			
 		}

@@ -50,6 +50,13 @@ public class Customer {
 		this.lineLength = lineLength;
 	}
 	/**
+	 * Set the time the customer question was answered
+	 * @param answerTime - the time the customer question was answered
+	 */
+	public void setAnswerTime(double answerTime){
+		this.answerTime = answerTime;
+	}
+	/**
 	 * Set the time left in order for the question to be answered
 	 * @param remainingTime - the time left to answer the question
 	 */
