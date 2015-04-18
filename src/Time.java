@@ -166,13 +166,23 @@ public class Time {
 
 	}
 	
-	protected LinkedList customersRemaining() {
+
+	/**
+	 * 
+	 * @return LinkedList of customers waiting in line
+	 */
+	private LinkedList customersRemaining() {
 	
 		return customersWaiting;
 		
 	}
 	
-	protected LinkedList customersComplete(){
+
+	/**
+	 * 
+	 * @return LinkedList of customers with questions answered
+	 */
+	private LinkedList customersComplete(){
 		
 		return customersComplete;
 	}
