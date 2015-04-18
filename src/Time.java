@@ -48,6 +48,7 @@ public class Time {
 	 * main driver of the time keeping class. 
 	 */
 	private void currentTimeSim(){
+		int total = 0;
 
 		System.out.println("Start");
 		
@@ -71,6 +72,7 @@ public class Time {
 				currentTime = customerDoorTime;
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 2, customersWaiting.size());
+				total++;
 				customersWaiting.add(newCustomer);
 				if(customer == null){
 					if(customersWaiting.size() == 0){
@@ -88,6 +90,7 @@ public class Time {
 					customerDoorTime = customerDoorTime + doorArrivalPoisson();
 					
 					System.out.println("Door customer interrupted");
+					customersWaiting.add(customer);
 					customer = null;
 					continue;
 				}
@@ -96,8 +99,9 @@ public class Time {
 				//customersComplete.add(customer); // add customer to list of completed customers
 
 				customerDoorTime = customerDoorTime + doorArrivalPoisson();
-				
 				System.out.println("Door Customer complete");
+				System.out.println(customer);
+				customersComplete.add(customer); // add customer to list of completed customers
 				
 			}
 			
@@ -108,7 +112,7 @@ public class Time {
 				customerCallTime = customerCallTime + phoneCallPoisson();
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 1, customersWaiting.size());
-				customersWaiting.add(0, newCustomer);
+				total++;
 				customer = newCustomer;
 				
 				System.out.println("Phone Customer");
@@ -121,6 +125,7 @@ public class Time {
 					customerCallTime = customerCallTime + phoneCallPoisson();
 					
 					System.out.println("Phone Customer interrupted");
+					customersWaiting.add(0, customer);
 					customer = null;
 					continue;
 				}
@@ -130,27 +135,36 @@ public class Time {
 
 				customerCallTime = customerCallTime + phoneCallPoisson();
 				System.out.println("Phone Customer complete");
-				
-			}
-			
-			if(customer != null){
+				System.out.println(customer);
 				customersComplete.add(customer); // add customer to list of completed customers
+				
 			}
 			
 		}
 		
-		/*
-		 * ***Using this for debugging purposes***
-		 * 
+		/**
+		for(int i = 0; i<customersComplete.size()-1; i++){
+			Customer curr = customersComplete.get(i);
+			Customer next = customersComplete.get(i+1);
+				if(curr.getAnswerTime() > next.getAnswerTime()){
+					customersComplete.add(i, next);
+					customersComplete.add(i+1, curr);
+				}
+		}
+		
+		*/
+		
 		System.out.println(customersComplete.size());
 		System.out.println(customersWaiting.size());
+		System.out.println(total);
+		
 		int count = 0;
 		for(int i = 0; i< customersComplete.size(); i++){
 			System.out.println(customersComplete.get(i));
 			count++;
 			System.out.println(count);
 		}
-		*/
+
 	}
 	
 	/**
