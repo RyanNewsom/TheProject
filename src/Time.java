@@ -82,7 +82,7 @@ public class Time {
 				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
 				if((currentTime + questionTime) > customerCallTime){
-					int remainingQuestionTime = (int)(customerCallTime - (currentTime + questionTime)); //get remaining question time
+					int remainingQuestionTime = (int)((currentTime + questionTime) - customerCallTime); //get remaining question time
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerDoorTime = customerDoorTime + doorArrivalPoisson();
@@ -91,11 +91,9 @@ public class Time {
 					
 					continue;
 				}
+				currentTime = currentTime + customer.getRemaining();
 				customersComplete.add(customer); // add customer to list of completed customers
-				if(customersWaiting.size() != 0){
-					customer = customersWaiting.remove(0);
-				}
-				currentTime = currentTime + questionTime;
+
 				customerDoorTime = customerDoorTime + doorArrivalPoisson();
 				
 				System.out.println("Door Customer complete");
@@ -106,6 +104,7 @@ public class Time {
 			if(customerType == "Phone Customer"){
 				
 				currentTime = customerCallTime;
+				customerCallTime = customerCallTime + phoneCallPoisson();
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 10, 10);
 				customersWaiting.add(0, newCustomer);
@@ -115,7 +114,7 @@ public class Time {
 				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
 				if((currentTime + questionTime) > customerCallTime){
-					int remainingQuestionTime = (int)(customerCallTime - (currentTime + questionTime)); //get remaining question time
+					int remainingQuestionTime = (int)((currentTime + questionTime) - customerCallTime); //get remaining question time
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerCallTime = customerCallTime + phoneCallPoisson();
@@ -124,11 +123,9 @@ public class Time {
 					
 					continue;
 				}
+				currentTime = currentTime + customer.getRemaining();
 				customersComplete.add(customer); // add customer to list of completed customers
-				if(customersWaiting.size() != 0){
-					customer = customersWaiting.remove(0);
-				}
-				currentTime = currentTime + questionTime;
+
 				customerCallTime = customerCallTime + phoneCallPoisson();
 				System.out.println("Phone Customer complete");
 				
