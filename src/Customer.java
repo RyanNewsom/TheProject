@@ -59,7 +59,7 @@ public class Customer {
 	}
 	public String toString(){
 		String theString;
-		theString = ("");
+		theString = (name + ":" + type + ":" + "start-time:" + startTime + "answer-time:" + answerTime + "asked " + phrase + "and the Secretar responded with " + answer + "and the line was " + lineLength + "long after.");
 		return theString;
 	}
 }

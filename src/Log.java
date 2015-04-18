@@ -24,7 +24,6 @@ public class Log {
 	
 	public void createLog()
 	{
-		System.out.println("asdasdsad");
 		JFrame frame = new JFrame("Today at the office...");
 		//JPanel panel = new IPanel();
 		JTextArea textArea = new JTextArea("Results go here.");
@@ -62,6 +61,7 @@ public class Log {
 				temp = atEndTime.remove();
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
+				System.out.println("the line is not empty");
 				}
 			else empty = false;
 		}while(empty);
