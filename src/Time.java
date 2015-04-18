@@ -34,7 +34,7 @@ public class Time {
 	}
 	
 	/**
-	 * Constructor that takes an int for the simulation endTime
+	 * Constructor that takes an integer for the simulation endTime
 	 * 
 	 * @param endTime - Length of the simulation time in minutes, converts it to seconds in the constructor
 	 */
@@ -73,6 +73,9 @@ public class Time {
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 10, 10);
 				customersWaiting.add(newCustomer);
 				if(customer == null){
+					if(customersWaiting.size() == 0){
+						continue;
+					}
 					customer = customersWaiting.remove();
 					System.out.println("customer");
 				}
@@ -89,7 +92,10 @@ public class Time {
 					continue;
 				}
 				customersComplete.add(customer); // add customer to list of completed customers
-				customer = customersWaiting.remove(0);
+				if(customersWaiting.size() != 0){
+					customer = customersWaiting.remove(0);
+				}
+				currentTime = currentTime + questionTime;
 				customerDoorTime = customerDoorTime + doorArrivalPoisson();
 				
 				System.out.println("Door Customer complete");
@@ -119,7 +125,10 @@ public class Time {
 					continue;
 				}
 				customersComplete.add(customer); // add customer to list of completed customers
-				customer = customersWaiting.remove(0);
+				if(customersWaiting.size() != 0){
+					customer = customersWaiting.remove(0);
+				}
+				currentTime = currentTime + questionTime;
 				customerCallTime = customerCallTime + phoneCallPoisson();
 				System.out.println("Phone Customer complete");
 				
@@ -129,10 +138,14 @@ public class Time {
 		
 	}
 	
+	/**
+	 * Returns the next scheduled event
+	 */
 	private void nextEvent(){
 		
 		if(customerDoorTime < customerCallTime){
 			customerType = "Door Customer";
+			return;
 		}
 		customerType = "Phone Customer";
 	}
@@ -144,7 +157,7 @@ public class Time {
 
 		double p,U;
 		U = Math.random();
-		p = 155.0 *  -Math.log(U);
+		p = 55.0 *  -Math.log(U);
 		return p;
 
 	}
@@ -178,7 +191,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers waiting in line
 	 */
-	protected LinkedList customersRemaining() {
+	protected LinkedList<Customer> customersRemaining() {
 	
 		return customersWaiting;
 		
@@ -189,7 +202,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers with questions answered
 	 */
-	protected LinkedList customersComplete(){
+	protected LinkedList<Customer> customersComplete(){
 		
 		return customersComplete;
 	}
