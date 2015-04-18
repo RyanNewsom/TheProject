@@ -137,8 +137,5 @@ public class Message {
 						break;
 				}
 			return name;
-		
-		
 		}
 }
-

@@ -97,13 +97,13 @@ public class Office {
 	public void runIt(int runTime){
 		LinkedList list1 = new LinkedList();
 		LinkedList listAfterRun = new LinkedList();
-		/*
+		
 		Time runIt = new Time(runTime);
-		list1 = runIt.getLinkedList2()
-		list2 = runIt.getLinkedList1();
+		listAfterRun = runIt.customersRemaining();
+		list1 = runIt.customersComplete();
 		//Time to print out all the customer information per Gordons specs to the Log GUI.
-		Log theLog = new Log(list1, list2);
+		Log theLog = new Log(list1, listAfterRun);
 		theLog.createLog();
-		*/
+		
 	}
 }

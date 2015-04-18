@@ -43,25 +43,30 @@ public class Log {
 		boolean empty = false;
 		String contents = "";
 		do{
-			Object temp = before.remove();
+			Object temp = before.peek();
 			if(temp!=null){
+				temp = before.remove();
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
+				System.out.println("asasd");
 			}
-			else empty = true;
+			else empty = false;
 		}while(empty);
 		
-		empty = false;
+		empty = true;
 		
 		do{
-			Object temp = atEndTime.remove();
+			Object temp = atEndTime.peek();
 			if(temp!=null) {
+				temp = atEndTime.remove();
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
+				System.out.println("the line is not empty");
 				}
-			else empty = true;
+			else empty = false;
 		}while(empty);
 		
 		textArea.setText(contents);
+		System.out.println("dsdfsdf");
 	}
 }
