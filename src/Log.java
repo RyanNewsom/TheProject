@@ -24,6 +24,7 @@ public class Log {
 	
 	public void createLog()
 	{
+		System.out.println("asdasdsad");
 		JFrame frame = new JFrame("Today at the office...");
 		//JPanel panel = new IPanel();
 		JTextArea textArea = new JTextArea("Results go here.");
@@ -48,11 +49,12 @@ public class Log {
 				temp = before.remove();
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
+				System.out.println("asasd");
 			}
-			else empty = true;
+			else empty = false;
 		}while(empty);
 		
-		empty = false;
+		empty = true;
 		
 		do{
 			Object temp = atEndTime.peek();
@@ -61,7 +63,7 @@ public class Log {
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
 				}
-			else empty = true;
+			else empty = false;
 		}while(empty);
 		
 		textArea.setText(contents);
