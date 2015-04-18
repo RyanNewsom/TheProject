@@ -47,7 +47,6 @@ public class Log {
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		frame.add(scrollPane);
-		frame.setVisible(true);
 		frame.setBounds(100, 100, 800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -59,7 +58,6 @@ public class Log {
 				temp = before.remove();
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
-				System.out.println("asasd");
 			}
 			else empty = false;
 		}while(empty);
@@ -72,12 +70,11 @@ public class Log {
 				temp = atEndTime.remove();
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
-				System.out.println("the line is not empty");
 				}
 			else empty = false;
 		}while(empty);
 		
 		textArea.setText(contents);
-		System.out.println("dsdfsdf");
+		frame.setVisible(true);
 	}
 }
