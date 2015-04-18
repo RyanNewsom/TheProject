@@ -62,6 +62,7 @@ public class Log {
 			else empty = false;
 		}while(empty);
 		
+		
 		empty = true; // reset the boolean
 		
 		do{
