@@ -51,7 +51,7 @@ public class Log {
 		frame.setBounds(100, 100, 800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		boolean empty = false;
+		boolean empty = true;
 		String contents = "";
 		do{
 			Object temp = before.peek();

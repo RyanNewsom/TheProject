@@ -78,7 +78,7 @@ public class Customer {
 	/**
 	 * Formats the time in seconds to hours, minutes, seconds
 	 * @param totalSeconds - the amount of time in seconds
-	 * @return
+	 * @return a formatted time consisting of Hours:minutes:seconds
 	 */
 	private static String timeConversion(int totalSeconds) {
 
