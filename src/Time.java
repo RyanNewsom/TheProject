@@ -171,7 +171,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers waiting in line
 	 */
-	private LinkedList customersRemaining() {
+	protected LinkedList customersRemaining() {
 	
 		return customersWaiting;
 		
@@ -182,7 +182,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers with questions answered
 	 */
-	private LinkedList customersComplete(){
+	protected LinkedList customersComplete(){
 		
 		return customersComplete;
 	}
