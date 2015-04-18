@@ -69,8 +69,28 @@ public class Customer {
 	 */
 	public String toString(){
 		String theString;
-		theString = (name + ":" + type + ":" + "start-time:" + startTime + "answer-time:" + answerTime + "asked " + phrase + "and the Secretar responded with " + answer + "and the line was " + lineLength + "long after.");
+		String startTimeF = timeConversion((int)startTime);
+		String answerTimeF = timeConversion((int)answerTime);
+		theString = (name + ": " + type + ":" + "Start-Time - " + startTimeF + "Answer-time - " + answerTimeF + "Her question was... " + phrase + " The Secretary responded with: " + answer + 
+				". The line was " + lineLength + " long after the customer left.");
 		return theString;
+	}
+	/**
+	 * Formats the time in seconds to hours, minutes, seconds
+	 * @param totalSeconds - the amount of time in seconds
+	 * @return
+	 */
+	private static String timeConversion(int totalSeconds) {
+
+	    final int MINUTES_IN_AN_HOUR = 60;
+	    final int SECONDS_IN_A_MINUTE = 60;
+
+	    int seconds = totalSeconds % SECONDS_IN_A_MINUTE;
+	    int totalMinutes = totalSeconds / SECONDS_IN_A_MINUTE;
+	    int minutes = totalMinutes % MINUTES_IN_AN_HOUR;
+	    int hours = totalMinutes / MINUTES_IN_AN_HOUR;
+
+	    return hours + ":" + minutes + ":" + seconds + ":";
 	}
 }
 
