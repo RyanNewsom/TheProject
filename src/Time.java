@@ -167,12 +167,20 @@ public class Time {
 
 	}
 	
+	/**
+	 * 
+	 * @return LinkedList of customers waiting in line
+	 */
 	private LinkedList customersRemaining() {
 	
 		return customersWaiting;
 		
 	}
 	
+	/**
+	 * 
+	 * @return LinkedList of customers with questions answered
+	 */
 	private LinkedList customersComplete(){
 		
 		return customersComplete;
