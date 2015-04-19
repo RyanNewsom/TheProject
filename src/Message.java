@@ -3,13 +3,13 @@
  * @author Ryan Newsom
  * @version 2
  */
-public class Message {
+class Message {
 	/**
 	 * Generate a message for the customer to ask.
 	 * @param theQuestion - this should be a randomly generated int from 0-14 on YOUR end.
 	 * @return - The question the customer has
 	 */
-	public static String getQuestion(int theQuestion){
+	protected static String getQuestion(int theQuestion){
 		String question = "your ? index is out of bounds";
 		switch(theQuestion){
 			case 0 :question = "Blondes or burnettes?";
@@ -50,7 +50,7 @@ public class Message {
 	 * @param theAnswer - the int that matches the randomly generate question
 	 * @return - the correct answer that goes with a certain question
 	 */
-		public static String getAnswer(int theAnswer){
+		protected static String getAnswer(int theAnswer){
 			String answer = "Your answer index is out of bounds";
 			switch(theAnswer){
 				case 0 :answer = "Well... that depends on many things";
@@ -91,7 +91,7 @@ public class Message {
 		 * @param randomInt - a randomly generated int which will pick a name
 		 * @return - a randomly generated name
 		 */
-		public static String getName(int randomInt){
+		protected static String getName(int randomInt){
 			String name = "Your name index is out of bounds";
 			switch(randomInt){
 				case 0 :name = "Samantha";

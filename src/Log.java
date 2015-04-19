@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 import com.sun.corba.se.impl.orbutil.graph.Node;
@@ -13,7 +14,7 @@ import com.sun.corba.se.impl.orbutil.graph.Node;
  * @author Ryan Newsom
  * @version 1
  */
-public class Log {
+class Log {
 	/** This linked list contains all the customers that had questions that were answered */
 	LinkedList before; 
 	/** This linked list contains all the customers that are still in line after the office simulation */
@@ -24,7 +25,7 @@ public class Log {
 	 * @param before - all the customers that had questions that were answered
 	 * @param atEndTime - all the customers who are still in line after the office simulation ends 
 	 */
-	public Log(LinkedList before, LinkedList atEndTime){
+	protected Log(LinkedList before, LinkedList atEndTime){
 		this.before = before;
 		this.atEndTime = atEndTime;
 	}
@@ -32,12 +33,14 @@ public class Log {
 	/**
 	 * This method creates the gui inside the JFrame and will desploy all the customers information for the linked lists.
 	 */
-	public void createLog()
+	protected void createLog()
 	{
 		JFrame frame = new JFrame("Today at the office...");
 		//JPanel panel = new IPanel();
 		JTextArea textArea = new JTextArea("Results go here.");
 		JScrollPane scrollPane = new JScrollPane(textArea);
+		JTable table = new JTable();
+		//table.setValueAt("asdasd", row, column);
 		
 		textArea.setSize(500, 500);
 		textArea.setEditable(false);

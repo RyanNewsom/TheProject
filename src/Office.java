@@ -23,16 +23,16 @@ import javax.swing.JTextField;
  * @author Ryan Newsom
  * @version 1
  */
-public class Office {
+class Office {
 
-	public static void main(String[]args){
+	protected static void main(String[]args){
 		Office office = new Office();
 	}
 	/**
 	 * Displays the GUI's and allows for the user to enter in a time they would like to run the office 
 	 * simulation for.
 	 */
-	public Office(){
+	protected Office(){
 		JFrame frame = new JFrame("Just another day at the office...");
 		JLabel title = new JLabel("Please enter the time for the office simulation in minutes");
 		File file = new File("workaholics.jpg");
@@ -100,7 +100,7 @@ public class Office {
 	 * 
 	 * @param runTime - the amount of time to simulate the office in minutes
 	 */
-	public void runIt(int runTime){
+	protected void runIt(int runTime){
 		LinkedList list1 = new LinkedList();
 		LinkedList listAfterRun = new LinkedList();
 		

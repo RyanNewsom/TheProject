@@ -7,7 +7,7 @@ import java.util.Random;
  * @author 
  *
  */
-public class Customer {
+class Customer {
 	/** Name of the customer */
 	String name;
 	/** Phone-call or walk-in */
@@ -36,7 +36,7 @@ public class Customer {
 	 * @param prior - priority of the customer
 	 * @param lineLength - After the customer has their question answered and leaves i.e. don't include this customer in the count
 	 */
-	public Customer(String type, double sTime, double answerTime, int remainingTime, int prior, int lineLength){
+	protected Customer(String type, double sTime, double answerTime, int remainingTime, int prior, int lineLength){
 		Random rand = new Random();// Will be used to generate a random integer
 		int question = rand.nextInt(14);
 		name = Message.getName(rand.nextInt(24));
@@ -53,31 +53,45 @@ public class Customer {
 	 * Set the time the customer question was answered
 	 * @param answerTime - the time the customer question was answered
 	 */
-	public void setAnswerTime(double answerTime){
+	protected void setAnswerTime(double answerTime){
 		this.answerTime = answerTime;
 	}
 	/**
 	 * Set the time the customer question was answered
 	 * @param answerTime - the time the customer question was answered
 	 */
-	public double getAnswerTime(){
+	protected double getAnswerTime(){
 		return answerTime;
 	}
 	/**
 	 * Set the time left in order for the question to be answered
 	 * @param remainingTime - the time left to answer the question
 	 */
-	public void setRemaining(int remainingTime){
+	protected void setRemaining(int remainingTime){
 		this.remainingTime = remainingTime;
 	}
 	/**
 	 * Get's the remaining time for the customer's question to be answered
 	 * @return - the time left for the customer to have their question answered
 	 */
-	public int getRemaining(){
+	protected int getRemaining(){
 		return remainingTime;
 	}
+	/**
+	 * Returns the start time nicely formatted
+	 * @return - the start time 
+	 */
+	protected String getStartTimeF(){
+		return timeConversion((int)startTime);
+	}
 	
+	/**
+	 * Returns the answer time nicely formatted
+	 * @return - the answer time
+	 */
+	protected String getAnswerTimeF(){
+		return timeConversion((int)answerTime);
+	}
 	/**
 	 * Formats all the information of the customer so it can be easily obtained and used 
 	 */
