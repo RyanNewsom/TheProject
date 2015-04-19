@@ -79,7 +79,7 @@ public class Time {
 					if(customersWaiting.size() == 0){
 						continue;
 					}
-					customer = customersWaiting.remove(0);
+					customer = customersWaiting.remove();
 					System.out.println("customer");
 				}
 				//This loop is if a customer is scheduled to call while a customer is in line. 
@@ -90,13 +90,14 @@ public class Time {
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerDoorTime = customerDoorTime + doorArrivalPoisson();
 					System.out.println("Door customer interrupted");
-					customersWaiting.add(0, customer);
+					customersWaiting.add(customer);
 					continue;
 					
 				}
-				
 				currentTime = currentTime + customer.getRemaining();
 				customer.setAnswerTime(currentTime);
+				//customersComplete.add(customer); // add customer to list of completed customers
+
 				customerDoorTime = customerDoorTime + doorArrivalPoisson();
 				System.out.println("Door Customer complete");
 				System.out.println(customer);
@@ -112,14 +113,7 @@ public class Time {
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 1, customersWaiting.size());
 				total++;
-				customersWaiting.add(0, newCustomer);
-				if(customer == null){
-					if(customersWaiting.size() == 0){
-						continue;
-					}
-					customer = customersWaiting.remove(0);
-					System.out.println("customer");
-				}
+				customer = newCustomer;
 				
 				System.out.println("Phone Customer");
 				
@@ -138,6 +132,8 @@ public class Time {
 				
 				currentTime = currentTime + customer.getRemaining();
 				customer.setAnswerTime(currentTime);
+				//customersComplete.add(customer); // add customer to list of completed customers
+
 				customerCallTime = customerCallTime + phoneCallPoisson();
 				System.out.println("Phone Customer complete");
 				System.out.println(customer);
