@@ -17,7 +17,7 @@ class Customer {
 	/** The time their question was answered */
 	double answerTime;
 	/** The time remaining for the customers question to be answered */
-	int remainingTime;
+	double remainingTime;
 	/** The customers question */
 	String phrase;
 	/** The answer the customer was given */
@@ -36,7 +36,7 @@ class Customer {
 	 * @param prior - priority of the customer
 	 * @param lineLength - After the customer has their question answered and leaves i.e. don't include this customer in the count
 	 */
-	protected Customer(String type, double sTime, double answerTime, int remainingTime, int prior, int lineLength){
+	protected Customer(String type, double sTime, double answerTime, double remainingTime, int prior, int lineLength){
 		Random rand = new Random();// Will be used to generate a random integer
 		int question = rand.nextInt(14);
 		name = Message.getName(rand.nextInt(24));
@@ -47,6 +47,13 @@ class Customer {
 		phrase = Message.getQuestion(question);// Generates a random int which will allow for a random question to be returned
 		answer = Message.getAnswer(question);// Generates the appropriate answer for the question
 		this.priority = prior;
+		this.lineLength = lineLength;
+	}
+	/**
+	 * Set the time the customer question was answered
+	 * @param answerTime - the time the customer question was answered
+	 */
+	protected void setLineRemainingSize(int lineLength){
 		this.lineLength = lineLength;
 	}
 	/**
@@ -67,14 +74,14 @@ class Customer {
 	 * Set the time left in order for the question to be answered
 	 * @param remainingTime - the time left to answer the question
 	 */
-	protected void setRemaining(int remainingTime){
+	protected void setRemaining(double remainingTime){
 		this.remainingTime = remainingTime;
 	}
 	/**
 	 * Get's the remaining time for the customer's question to be answered
 	 * @return - the time left for the customer to have their question answered
 	 */
-	protected int getRemaining(){
+	protected double getRemaining(){
 		return remainingTime;
 	}
 	/**
