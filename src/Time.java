@@ -142,19 +142,25 @@ public class Time {
 			
 		}
 		
-		for(int i = 0; i<customersComplete.size()-1; i++){
-			
+		//sort list
+		for(int i = 0; i<customersComplete.size()-1; i++){			
 			Customer curr = customersComplete.get(i);
 			Customer next = customersComplete.get(i+1);
-			if(curr.getStartTimeF() == next.getStartTimeF()){
-				customersComplete.remove(i);
-			}
 			if(curr.getAnswerTime() > next.getAnswerTime()){
 				customersComplete.add(i, next);
 				customersComplete.add(i+1, curr);
 				break;
 			}
 			
+		}
+		
+		//remove duplicates
+		for(int i = 0; i<customersComplete.size()-1; i++){
+			Customer curr = customersComplete.get(i);
+			Customer next = customersComplete.get(i+1);
+			if(curr.getAnswerTime() == next.getAnswerTime()){
+				customersComplete.remove(i+1);
+			}
 		}
 		
 		
