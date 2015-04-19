@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  */
 class Office {
 
-	protected static void main(String[]args){
+	public static void main(String[]args){
 		Office office = new Office();
 	}
 	/**
