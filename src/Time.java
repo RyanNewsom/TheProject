@@ -63,6 +63,7 @@ public class Time {
 			System.out.println("loop " + currentTime);
 			System.out.println(customersWaiting.size());
 			Customer customer = null;
+			
 			nextEvent(); // get next customer type
 			
 			if(customerType == "Door Customer"){
@@ -78,26 +79,24 @@ public class Time {
 					if(customersWaiting.size() == 0){
 						continue;
 					}
-					customer = customersWaiting.remove();
+					customer = customersWaiting.remove(0);
 					System.out.println("customer");
 				}
-				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
 				if((currentTime + questionTime) > customerCallTime){
+					
 					int remainingQuestionTime = (int)((currentTime + questionTime) - customerCallTime); //get remaining question time
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerDoorTime = customerDoorTime + doorArrivalPoisson();
-					
 					System.out.println("Door customer interrupted");
-					customersWaiting.add(customer);
-					customer = null;
+					customersWaiting.add(0, customer);
 					continue;
+					
 				}
+				
 				currentTime = currentTime + customer.getRemaining();
 				customer.setAnswerTime(currentTime);
-				//customersComplete.add(customer); // add customer to list of completed customers
-
 				customerDoorTime = customerDoorTime + doorArrivalPoisson();
 				System.out.println("Door Customer complete");
 				System.out.println(customer);
@@ -113,47 +112,57 @@ public class Time {
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, (int) questionTime, 1, customersWaiting.size());
 				total++;
-				customer = newCustomer;
+				customersWaiting.add(0, newCustomer);
+				if(customer == null){
+					if(customersWaiting.size() == 0){
+						continue;
+					}
+					customer = customersWaiting.remove(0);
+					System.out.println("customer");
+				}
 				
 				System.out.println("Phone Customer");
 				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
 				if((currentTime + questionTime) > customerCallTime){
+					
 					int remainingQuestionTime = (int)((currentTime + questionTime) - customerCallTime); //get remaining question time
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerCallTime = customerCallTime + phoneCallPoisson();
-					
 					System.out.println("Phone Customer interrupted");
 					customersWaiting.add(0, customer);
-					customer = null;
 					continue;
+					
 				}
+				
 				currentTime = currentTime + customer.getRemaining();
 				customer.setAnswerTime(currentTime);
-				//customersComplete.add(customer); // add customer to list of completed customers
-
 				customerCallTime = customerCallTime + phoneCallPoisson();
 				System.out.println("Phone Customer complete");
 				System.out.println(customer);
 				customersComplete.add(customer); // add customer to list of completed customers
-				
 			}
 			
 		}
 		
 		for(int i = 0; i<customersComplete.size()-1; i++){
+			
 			Customer curr = customersComplete.get(i);
 			Customer next = customersComplete.get(i+1);
-				if(curr.getAnswerTime() > next.getAnswerTime()){
-					customersComplete.add(i, next);
-					customersComplete.add(i+1, curr);
-					break;
-				}
+			if(curr.getStartTimeF() == next.getStartTimeF()){
+				customersComplete.remove(i);
 			}
+			if(curr.getAnswerTime() > next.getAnswerTime()){
+				customersComplete.add(i, next);
+				customersComplete.add(i+1, curr);
+				break;
+			}
+			
 		}
 		
-		/*
+		
+		
 		System.out.println(customersComplete.size());
 		System.out.println(customersWaiting.size());
 		System.out.println(total);
@@ -165,8 +174,9 @@ public class Time {
 			System.out.println(count);
 		}
 
+	 
 	}
-	*/
+	
 	
 	/**
 	 * Returns the next scheduled event
