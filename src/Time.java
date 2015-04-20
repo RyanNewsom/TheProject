@@ -131,6 +131,7 @@ public class Time {
 					System.out.println("Phone Customer interrupted");
 					customersWaiting.add(0, customer);
 					continue;
+					
 				}
 				
 				currentTime = currentTime + customer.getRemaining();
@@ -143,6 +144,7 @@ public class Time {
 				System.out.println(customer);
 				customersComplete.add(customer); // add customer to list of completed customers
 			}
+			
 		}
 		
 		//sort list
@@ -154,6 +156,7 @@ public class Time {
 				customersComplete.add(i+1, curr);
 				break;
 			}
+			
 		}
 		
 		System.out.println(customersComplete.size());
@@ -166,6 +169,8 @@ public class Time {
 			count++;
 			System.out.println(count);
 		}
+
+	 
 	}
 	
 	

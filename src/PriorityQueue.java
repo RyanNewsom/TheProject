@@ -48,7 +48,7 @@ public class PriorityQueue<Element> {
         return size;
     }
     /**
-     * setCurrent() sets the Nod current to the Node at spot 'index' in the list
+     * setCurrent() sets the Node current to the Node at spot 'index' in the list
      * 
      */
     private void setCurrent(int index) {
@@ -63,7 +63,7 @@ public class PriorityQueue<Element> {
     }
     
     /**
-     *
+     * 
      * @return - the position of the node with the highest priority in the list
      */
     public int highestPriority () { 
