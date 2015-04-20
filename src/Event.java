@@ -10,7 +10,12 @@ public class Event {
 	private String name;
 	/** The time the event happens  in seconds */
 	private double time;
-	
+	/**
+	 * When you create an event record all these values. They should NEVER need to be changed, ever.
+	 * @param type - The type of the event (Phone call, Walk-in, Question Answered)
+	 * @param name - The name of the customer
+	 * @param time - The time the event occured
+	 */
 	protected Event(String type, String name, double time)
 	{
 		this.type = type;
