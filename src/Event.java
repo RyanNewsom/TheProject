@@ -10,6 +10,8 @@ public class Event {
 	private String name;
 	/** The time the event happens  in seconds */
 	private double time;
+	/** The length of the line after the event */
+	private int lineLength;
 	/**
 	 * When you create an event record all these values. They should NEVER need to be changed, ever.
 	 * @param type - The type of the event (Phone call, Walk-in, Question Answered, Interrupted)
@@ -42,7 +44,9 @@ public class Event {
 	    int minutes = totalMinutes % MINUTES_IN_AN_HOUR;
 	    int hours = totalMinutes / MINUTES_IN_AN_HOUR;
 
-	    return hours + ":" + minutes + ":" + seconds + ":";
+	    if (seconds <10)
+	    	seconds += 0;
+	    return hours + ":" + minutes + ":" + seconds;
 	}
 	
 	
