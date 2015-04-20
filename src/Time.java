@@ -75,7 +75,7 @@ public class Time {
 				currentTime = customerDoorTime;
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
-				event = new Event("Customer came through the door", customer.getName, currentTime);
+				event = new Event("Customer came through the door", customer.getName(), currentTime);
 				eventList.add(event);
 				total++;
 				customersWaiting.add(newCustomer);
@@ -118,7 +118,7 @@ public class Time {
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 1, customersWaiting.size());
 				total++;
-				event = new Event("Customer has called.", customer.getName, currentTime);
+				event = new Event("Customer has called.", customer.getName(), currentTime);
 				eventList.add(event);
 				
 				customersWaiting.add(0, newCustomer);
@@ -149,7 +149,7 @@ public class Time {
 				System.out.println("Phone Customer complete");
 				System.out.println(customer);
 				customersComplete.add(customer); // add customer to list of completed customers
-				event = new Event("Customer question has been answered", customer.getName, customer.getAnswerTime());
+				event = new Event("Customer question has been answered", customer.getName(), customer.getAnswerTime());
 				eventList.add(event);
 			}
 			

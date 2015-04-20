@@ -53,6 +53,13 @@ class Customer {
 	 * Set the time the customer question was answered
 	 * @param answerTime - the time the customer question was answered
 	 */
+	protected String getName(){
+		return name;
+	}
+	/**
+	 * Set the time the customer question was answered
+	 * @param answerTime - the time the customer question was answered
+	 */
 	protected void setLineRemainingSize(int lineLength){
 		this.lineLength = lineLength;
 	}
