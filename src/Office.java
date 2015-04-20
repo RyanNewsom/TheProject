@@ -101,14 +101,12 @@ class Office {
 	 * @param runTime - the amount of time to simulate the office in minutes
 	 */
 	protected void runIt(int runTime){
-		LinkedList list1 = new LinkedList();
-		LinkedList listAfterRun = new LinkedList();
+		LinkedList eventList = new LinkedList();
 		
 		Time runIt = new Time(runTime);
-		listAfterRun = runIt.customersRemaining();
-		list1 = runIt.customersComplete();
+		eventList = runIt.getEventList();
 		//Time to print out all the customer information per Gordons specs to the Log GUI.
-		Log theLog = new Log(list1, listAfterRun);
+		Log theLog = new Log(eventList);
 		theLog.createLog();
 		
 	}

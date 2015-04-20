@@ -16,18 +16,15 @@ import com.sun.corba.se.impl.orbutil.graph.Node;
  */
 class Log {
 	/** This linked list contains all the customers that had questions that were answered */
-	LinkedList before; 
-	/** This linked list contains all the customers that are still in line after the office simulation */
-	LinkedList atEndTime;
+	LinkedList events; 
 	
 	/**
 	 * Creates a log which will need to access information from two separate Linked Lists
 	 * @param before - all the customers that had questions that were answered
 	 * @param atEndTime - all the customers who are still in line after the office simulation ends 
 	 */
-	protected Log(LinkedList before, LinkedList atEndTime){
-		this.before = before;
-		this.atEndTime = atEndTime;
+	protected Log(LinkedList events){
+		this.events = events;
 	}
 	
 	/**
@@ -56,25 +53,12 @@ class Log {
 		boolean empty = true;
 		String contents = "";
 		do{
-			Object temp = before.peek();
+			Object temp = events.peek();
 			if(temp!=null){
-				temp = before.remove();
+				temp = events.remove();
 				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
 			}
-			else empty = false;
-		}while(empty);
-		
-		
-		empty = true; // reset the boolean
-		
-		do{
-			Object temp = atEndTime.peek();
-			if(temp!=null) {
-				temp = atEndTime.remove();
-				String tempS = temp.toString();
-				contents += "\n" + temp.toString();
-				}
 			else empty = false;
 		}while(empty);
 		
