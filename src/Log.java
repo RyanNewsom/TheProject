@@ -56,7 +56,6 @@ class Log {
 			Object temp = events.peek();
 			if(temp!=null){
 				temp = events.remove();
-				String tempS = temp.toString();
 				contents += "\n" + temp.toString();
 			}
 			else empty = false;

@@ -75,7 +75,7 @@ public class Time {
 				currentTime = customerDoorTime;
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
-				event = new Event("Customer came through the door", customer.getName(), currentTime);
+				event = new Event("Customer came through the door", newCustomer.getName(), currentTime);
 				eventList.add(event);
 				total++;
 				customersWaiting.add(newCustomer);
@@ -118,7 +118,7 @@ public class Time {
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 1, customersWaiting.size());
 				total++;
-				event = new Event("Customer has called.", customer.getName(), currentTime);
+				event = new Event("Customer has called.", newCustomer.getName(), currentTime);
 				eventList.add(event);
 				
 				customersWaiting.add(0, newCustomer);
