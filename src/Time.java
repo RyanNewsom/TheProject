@@ -235,7 +235,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers waiting in line
 	 */
-	protected LinkedList<Customer> customersRemaining() {
+	protected LinkedList<Customer> getCustomersRemaining() {
 	
 		return customersWaiting;
 		
@@ -246,7 +246,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers with questions answered
 	 */
-	protected LinkedList<Customer> customersComplete(){
+	protected LinkedList<Customer> getCustomersComplete(){
 		
 		return customersComplete;
 	}
@@ -255,7 +255,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of events
 	 */
-	protected LinkedList<Event> eventList(){
+	protected LinkedList<Event> getEventList(){
 		
 		return eventList;
 	}
