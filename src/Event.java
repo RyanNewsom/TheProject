@@ -4,7 +4,7 @@
  *
  */
 public class Event {
-	/** This represents the type of the action. OPTIONS (1. Phone call 2. Walk-in 3. Question Answered 4. Interrupted" */
+	/** This represents the type of the action. OPTIONS (1. Phone call 2. Walk-in 3. Question Answered 4. Interrupted */
 	private String type;
 	/** The name of the customer */
 	private String name;
@@ -14,7 +14,7 @@ public class Event {
 	 * When you create an event record all these values. They should NEVER need to be changed, ever.
 	 * @param type - The type of the event (Phone call, Walk-in, Question Answered, Interrupted)
 	 * @param name - The name of the customer
-	 * @param time - The time the event occured
+	 * @param time - The time the event occurred
 	 */
 	protected Event(String type, String name, double time)
 	{

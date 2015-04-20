@@ -4,7 +4,7 @@ import java.util.Random;
  * This class represents the customer. The customer knows many things about himself
  * and will be either a phone-caller or walk-in. He will get his question from the message class
  * and the secretary will respond with a relative answer.
- * @author 
+ * @author Ryan Newsom
  *
  */
 class Customer {
