@@ -25,7 +25,7 @@ public class Time {
 	
 	LinkedList<Customer> customersWaiting = new LinkedList<Customer>(); // LinkedList of customers in line
 	LinkedList<Customer> customersComplete = new LinkedList<Customer>(); // LinkedList of customers complete
-	LinkedList<Object> eventList = new LinkedList<Object>(); // LinkedList of event objects
+	LinkedList<Event> eventList = new LinkedList<Event>(); // LinkedList of event objects
 	
 	/**
 	 * Blank constructor for time class
@@ -249,6 +249,15 @@ public class Time {
 	protected LinkedList<Customer> customersComplete(){
 		
 		return customersComplete;
+	}
+	
+	/**
+	 * 
+	 * @return LinkedList of events
+	 */
+	protected LinkedList<Event> eventList(){
+		
+		return eventList;
 	}
 	
 }
