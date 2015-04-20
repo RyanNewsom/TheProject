@@ -21,10 +21,11 @@ public class Time {
 	private double customerDoorTime = 0;
 	private double questionTime = Double.MAX_VALUE;
 	private double customerCallTime = 0;
-	String customerType;
+	private String customerType;
 	
 	LinkedList<Customer> customersWaiting = new LinkedList<Customer>(); // LinkedList of customers in line
 	LinkedList<Customer> customersComplete = new LinkedList<Customer>(); // LinkedList of customers complete
+	LinkedList<Object> eventList = new LinkedList<Object>(); // LinkedList of event objects
 	
 	/**
 	 * Blank constructor for time class
@@ -56,6 +57,7 @@ public class Time {
 		customerDoorTime = doorArrivalPoisson();
 		questionTime = Double.MAX_VALUE;
 		currentTime = 0;		// 0 seconds
+		Event event;
 		
 		System.out.println("Current time is " + currentTime + ", and end time is "+ endTime);
 		
@@ -73,6 +75,8 @@ public class Time {
 				currentTime = customerDoorTime;
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
+				event = new Event("Customer came through the door", customer.getName, currentTime);
+				eventList.add(event);
 				total++;
 				customersWaiting.add(newCustomer);
 				if(customer == null){
@@ -114,6 +118,8 @@ public class Time {
 				questionTime = questionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 1, customersWaiting.size());
 				total++;
+				event = new Event("Customer has called.", customer.getName, currentTime);
+				eventList.add(event);
 				
 				customersWaiting.add(0, newCustomer);
 				customer = customersWaiting.remove(0);
@@ -143,6 +149,8 @@ public class Time {
 				System.out.println("Phone Customer complete");
 				System.out.println(customer);
 				customersComplete.add(customer); // add customer to list of completed customers
+				event = new Event("Customer question has been answered", customer.getName, customer.getAnswerTime());
+				eventList.add(event);
 			}
 			
 		}
