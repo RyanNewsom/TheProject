@@ -22,6 +22,9 @@ public class Time {
 	private double questionTime = Double.MAX_VALUE;
 	private double customerCallTime = 0;
 	private String customerType;
+	Double pTime;
+	Double qTime;
+	Double dTime;
 	
 	LinkedList<Customer> customersWaiting = new LinkedList<Customer>(); // LinkedList of customers in line
 	LinkedList<Customer> customersComplete = new LinkedList<Customer>(); // LinkedList of customers complete
@@ -39,9 +42,12 @@ public class Time {
 	 * 
 	 * @param endTime - Length of the simulation time in minutes, converts it to seconds in the constructor
 	 */
-	public Time(double endTime){
+	public Time(double endTime, double pTime, double qTime, double dTime){
 		
 		this.endTime = (endTime * 60); // convert minutes to seconds
+		this.qTime = qTime;
+		this.pTime = pTime;
+		this.dTime = dTime;
 		currentTimeSim();	
 	}
 	
@@ -53,7 +59,7 @@ public class Time {
 
 		System.out.println("Start");
 		
-		customerCallTime = phoneCallPoisson();
+		customerCallTime = getPhoneCallPoisson();
 		customerDoorTime = doorArrivalPoisson();
 		questionTime = Double.MAX_VALUE;
 		currentTime = 0;		// 0 seconds
@@ -66,7 +72,7 @@ public class Time {
 			System.out.println(customersWaiting.size());
 			Customer customer = null;
 			
-			nextEvent(); // get next customer type
+			getNextEvent(); // get next customer type
 			
 			if(customerType == "Door Customer"){
 				
@@ -125,7 +131,7 @@ public class Time {
 				customer = customersWaiting.remove(0);
 				System.out.println("Phone Customer");
 				
-				customerCallTime = customerCallTime + phoneCallPoisson();
+				customerCallTime = customerCallTime + getPhoneCallPoisson();
 				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
 				if((currentTime + questionTime) > customerCallTime){
@@ -133,7 +139,7 @@ public class Time {
 					double remainingQuestionTime = ((currentTime + questionTime) - customerCallTime); //get remaining question time
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
-					customerCallTime = customerCallTime + phoneCallPoisson();
+					customerCallTime = customerCallTime + getPhoneCallPoisson();
 					System.out.println("Phone Customer interrupted");
 					customersWaiting.add(0, customer);
 					continue;
@@ -145,7 +151,7 @@ public class Time {
 				customer.setLineRemainingSize(customersWaiting.size());
 				//customersComplete.add(customer); // add customer to list of completed customers
 
-				customerCallTime = customerCallTime + phoneCallPoisson();
+				customerCallTime = customerCallTime + getPhoneCallPoisson();
 				System.out.println("Phone Customer complete");
 				System.out.println(customer);
 				customersComplete.add(customer); // add customer to list of completed customers
@@ -185,7 +191,7 @@ public class Time {
 	/**
 	 * Returns the next scheduled event
 	 */
-	private void nextEvent(){
+	private void getNextEvent(){
 		
 		if(customerDoorTime < customerCallTime){
 			customerType = "Door Customer";
@@ -197,11 +203,11 @@ public class Time {
 	/**
 	 * @return random number with a mean of 55 for phone call customers
 	 */
-	private double phoneCallPoisson() {
+	private double getPhoneCallPoisson() {
 
 		double p,U;
 		U = Math.random();
-		p = 55.0 *  -Math.log(U);
+		p = pTime *  -Math.log(U);
 		return p;
 
 	}
@@ -213,7 +219,7 @@ public class Time {
 
 		double p,U;
 		U = Math.random();
-		p = 24.0 *  -Math.log(U);
+		p = qTime *  -Math.log(U);
 		return p;
 
 	}
@@ -225,7 +231,7 @@ public class Time {
 
 		double p,U;
 		U = Math.random();
-		p = 45.0 *  -Math.log(U);
+		p = dTime *  -Math.log(U);
 		return p;
 
 	}
