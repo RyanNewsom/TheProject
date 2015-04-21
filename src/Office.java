@@ -34,13 +34,21 @@ class Office {
 	 */
 	protected Office(){
 		JFrame frame = new JFrame("Just another day at the office...");
-		JLabel title = new JLabel("Please enter the time for the office simulation in minutes");
+		JLabel title = new JLabel("An Office Simulation");
+		JLabel simTime = new JLabel("Time for office simulation: ");
+		JLabel labelP = new JLabel("Average time for a new customer phone call: ");
+		JLabel labelD = new JLabel("Average time for a new walk in customer: ");
+		JLabel labelQ = new JLabel("Average time for secretary to answer a question: ");
 		File file = new File("workaholics.jpg");
 		JTextField titleInput = new JTextField(20);
+		JTextField timeP = new JTextField(20);
+		JTextField timeQ = new JTextField(20);
+		JTextField timeD = new JTextField(20);
 		JButton go = new JButton("GO");
-		Font largeFont = new Font("SANS_SERIF", 1, 34);
-		Font mediumFont = new Font("SANS_SERIF", 0, 20);
-		Color teal = new Color(46, 177, 157);
+		Font largeFont = new Font("SANS_SERIF", 1, 50);
+		Font mediumFont = new Font("SANS_SERIF", 0, 30);
+		Font smallFont = new Font("SANS_SERIF", 0, 20);
+		Color grayl = new Color(0, 0, 0);
 		Image background = null;
 		
 		try {
@@ -58,24 +66,36 @@ class Office {
 		j.setLayout(new GridBagLayout());
 		
 		title.setFont(largeFont);
-		title.setForeground(teal);
-		titleInput.setFont(mediumFont);
+		title.setForeground(grayl);
+		simTime.setFont(mediumFont);
+		simTime.setForeground(Color.BLUE);
+		labelP.setFont(mediumFont);
+		labelP.setForeground(Color.BLUE);
+		labelQ.setFont(mediumFont);
+		labelQ.setForeground(Color.BLUE);
+		labelD.setFont(mediumFont);
+		labelD.setForeground(Color.BLUE);
+		
+		titleInput.setFont(smallFont);
+		timeP.setFont(smallFont);
+		timeQ.setFont(smallFont);
+		timeD.setFont(smallFont);
 		
 		go.setFont(largeFont);
 		go.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				runIt(Integer.parseInt(titleInput.getText()));
+				runIt(Integer.parseInt(titleInput.getText()), Integer.parseInt(timeP.getText()), Integer.parseInt(timeQ.getText()), Integer.parseInt(timeD.getText()));
 				
-				//
+				//ERROR HANDLING NEEDED STILL
 			}	
 		});
 		GridBagConstraints gbc = new GridBagConstraints();
 		//////////////Row 0//////////////////////
 		gbc.weightx = 0.1;
-		gbc.weighty = 0.15;
+		gbc.weighty = 0.05;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.gridwidth = 0;
+		gbc.gridwidth = 2;
 		gbc.anchor = GridBagConstraints.CENTER;
 		j.add(title,gbc);
 		//////////////Row 1//////////////////////
@@ -83,28 +103,89 @@ class Office {
 		gbc.weighty = 0.15;
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		gbc.gridwidth = 0;
-		gbc.anchor = GridBagConstraints.SOUTH;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.EAST;
+		j.add(simTime,gbc);
+		
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.15;
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.WEST;
 		j.add(titleInput,gbc);
 		//////////////Row 2//////////////////////
 		gbc.weightx = 0.1;
 		gbc.weighty = 0.15;
 		gbc.gridx = 0;
 		gbc.gridy = 2;
-		gbc.gridwidth = 0;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.EAST;
+		j.add(labelP,gbc);
+		
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.15;
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.WEST;
+		j.add(timeP,gbc);
+		///////////////Row 3///////////////////////
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.15;
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.EAST;
+		j.add(labelD,gbc);
+		
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.15;
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.WEST;
+		j.add(timeD,gbc);
+		//////////////Row 4/////////////////////////
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.15;
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.EAST;
+		j.add(labelQ,gbc);
+		
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.15;
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		gbc.gridwidth = 1;
+		gbc.anchor = GridBagConstraints.WEST;
+		j.add(timeQ,gbc);
+		//////////////Row 5////////////////////////
+		gbc.weightx = 0.1;
+		gbc.weighty = 0.15;
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.gridwidth = 2;
 		gbc.anchor = GridBagConstraints.CENTER;
 		j.add(go,gbc);
+		
+		
 		frame.setVisible(true);
 	}
 	/**
-	 * 
-	 * @param runTime - the amount of time to simulate the office in minutes
+	 * Runs the program itself
+	 * @param runTime
+	 * @param pTime
+	 * @param qTime
+	 * @param dTime
 	 */
-	protected void runIt(int runTime){
+	protected void runIt(int runTime, int pTime, int qTime, int dTime){
 		LinkedList eventList = new LinkedList();
 		
-		Time runIt = new Time(runTime);
-		eventList = runIt.getEventList();
+		//Time runIt = new Time(runTime, pTime, qTime, dTime);
+		//eventList = runIt.getEventList();
 		//Time to print out all the customer information per Gordons specs to the Log GUI.
 		Log theLog = new Log(eventList);
 		theLog.createLog();

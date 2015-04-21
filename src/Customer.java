@@ -24,7 +24,7 @@ class Customer {
 	String answer;
 	/** The customers priority */
 	int priority; 
-	/** The length of the line after the customer is done with their question*/
+	/** The length of the line after the customer is done with their question */
 	int lineLength;
 	
 	/**
@@ -135,6 +135,3 @@ class Customer {
 	    return hours + ":" + minutes + ":" + seconds + ":";
 	}
 }
-
-
-
