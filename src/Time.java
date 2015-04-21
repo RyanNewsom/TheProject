@@ -22,9 +22,9 @@ public class Time {
 	private double questionTime = Double.MAX_VALUE;
 	private double customerCallTime = 0;
 	private String customerType;
-	Double pTime;
-	Double qTime;
-	Double dTime;
+	private double pTime;
+	private double qTime;
+	private double dTime;
 	
 	LinkedList<Customer> customersWaiting = new LinkedList<Customer>(); // LinkedList of customers in line
 	LinkedList<Customer> customersComplete = new LinkedList<Customer>(); // LinkedList of customers complete
