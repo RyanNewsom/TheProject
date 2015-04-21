@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
@@ -84,9 +85,12 @@ class Office {
 		go.setFont(largeFont);
 		go.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				runIt(Integer.parseInt(titleInput.getText()), Integer.parseInt(timeP.getText()), Integer.parseInt(timeQ.getText()), Integer.parseInt(timeD.getText()));
-				
-				//ERROR HANDLING NEEDED STILL
+				try{
+					runIt(Integer.parseInt(titleInput.getText()), Integer.parseInt(timeP.getText()), Integer.parseInt(timeQ.getText()), Integer.parseInt(timeD.getText()));
+				}
+				catch(NumberFormatException nfe){
+					titleInput.setText("Error, you can only enter integers");
+				}
 			}	
 		});
 		GridBagConstraints gbc = new GridBagConstraints();
