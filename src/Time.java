@@ -60,7 +60,7 @@ public class Time {
 		System.out.println("Start");
 		
 		customerCallTime = getPhoneCallPoisson();
-		customerDoorTime = doorArrivalPoisson();
+		customerDoorTime = getDoorArrivalPoisson();
 		questionTime = Double.MAX_VALUE;
 		currentTime = 0;		// 0 seconds
 		Event event;
@@ -79,7 +79,7 @@ public class Time {
 				System.out.println("Door customer");
 				
 				currentTime = customerDoorTime;
-				questionTime = questionTimePoisson();
+				questionTime = getGuestionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
 				event = new Event("Customer came through the door", newCustomer.getName(), currentTime);
 				eventList.add(event);
@@ -99,7 +99,7 @@ public class Time {
 					double remainingQuestionTime = ((currentTime + questionTime) - customerCallTime); //get remaining question time
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
-					customerDoorTime = customerDoorTime + doorArrivalPoisson();
+					customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
 					System.out.println("Door customer interrupted");
 					customersWaiting.add(customer);
 					continue;
@@ -110,7 +110,7 @@ public class Time {
 				customer.setLineRemainingSize(customersWaiting.size());
 				//customersComplete.add(customer); // add customer to list of completed customers
 
-				customerDoorTime = customerDoorTime + doorArrivalPoisson();
+				customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
 				System.out.println("Door Customer complete");
 				System.out.println(customer);
 				customersComplete.add(customer); // add customer to list of completed customers
@@ -121,7 +121,7 @@ public class Time {
 			if(customerType == "Phone Customer"){
 				
 				currentTime = customerCallTime;
-				questionTime = questionTimePoisson();
+				questionTime = getGuestionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 1, customersWaiting.size());
 				total++;
 				event = new Event("Customer has called.", newCustomer.getName(), currentTime);
@@ -201,7 +201,7 @@ public class Time {
 	}
 
 	/**
-	 * @return random number with a mean of 55 for phone call customers
+	 * @return random number with a mean of pTime for phone call customers
 	 */
 	private double getPhoneCallPoisson() {
 
@@ -213,9 +213,9 @@ public class Time {
 	}
 
 	/**
-	 * @return random number with a mean of 24 for customer questions
+	 * @return random number with a mean of qTime for customer questions
 	 */
-	private double questionTimePoisson() {
+	private double getGuestionTimePoisson() {
 
 		double p,U;
 		U = Math.random();
@@ -225,9 +225,9 @@ public class Time {
 	}
 
 	/**
-	 * @return random number with a mean of 45 for door arrival customers
+	 * @return random number with a mean of dTime for door arrival customers
 	 */
-	private double doorArrivalPoisson() {
+	private double getDoorArrivalPoisson() {
 
 		double p,U;
 		U = Math.random();
