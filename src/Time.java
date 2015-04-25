@@ -85,6 +85,7 @@ public class Time {
 				eventList.add(event);
 				total++;
 				customersWaiting.add(newCustomer);
+				
 				if(customer == null){
 					if(customersWaiting.size() == 0){
 						continue;
@@ -93,7 +94,21 @@ public class Time {
 					questionTime = customer.getRemaining();
 					System.out.println("customer");
 				}
-				//This loop is if a customer is scheduled to call while a customer is in line. 
+				customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
+				
+				//This loop is if a customer is scheduled to walk through the door while a customer door customer question is being answered. 
+				if((currentTime + questionTime) > customerDoorTime){
+					currentTime = customerDoorTime;
+					double tempQuestionTime = getGuestionTimePoisson();
+					Customer tempCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
+					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
+					eventList.add(event);
+					total++;
+					customersWaiting.add(tempCustomer);
+					customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
+					
+				}
+				//This loop is if a customer is scheduled to call while a door customer question is being answered. 
 				if((currentTime + questionTime) > customerCallTime){
 					
 					double remainingQuestionTime = ((currentTime + questionTime) - customerCallTime); //get remaining question time
@@ -114,6 +129,8 @@ public class Time {
 				System.out.println("Door Customer complete");
 				System.out.println(customer);
 				customersComplete.add(customer); // add customer to list of completed customers
+				event = new Event("Door Customer question has been answered", customer.getName(), customer.getAnswerTime());
+				eventList.add(event);
 				
 			}
 			
@@ -133,13 +150,25 @@ public class Time {
 				
 				customerCallTime = customerCallTime + getPhoneCallPoisson();
 				
+				//This loop is if a customer is scheduled to walk through the door while a customer door customer question is being answered. 
+				if((currentTime + questionTime) > customerDoorTime){
+					
+					double tempQuestionTime = getGuestionTimePoisson();
+					Customer tempCustomer  = new Customer(customerType, customerDoorTime, questionTime, questionTime, 2, customersWaiting.size());
+					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
+					eventList.add(event);
+					total++;
+					customersWaiting.add(tempCustomer);
+					customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
+					
+				}
+				
 				//This loop is if a customer is scheduled to call while a customer is in line. 
 				if((currentTime + questionTime) > customerCallTime){
 					
 					double remainingQuestionTime = ((currentTime + questionTime) - customerCallTime); //get remaining question time
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
-					customerCallTime = customerCallTime + getPhoneCallPoisson();
 					System.out.println("Phone Customer interrupted");
 					customersWaiting.add(0, customer);
 					continue;
@@ -155,12 +184,12 @@ public class Time {
 				System.out.println("Phone Customer complete");
 				System.out.println(customer);
 				customersComplete.add(customer); // add customer to list of completed customers
-				event = new Event("Customer question has been answered", customer.getName(), customer.getAnswerTime());
+				event = new Event("Phone Customer question has been answered", customer.getName(), customer.getAnswerTime());
 				eventList.add(event);
 			}
 			
 		}
-		
+		/*
 		//sort list
 		for(int i = 0; i<customersComplete.size()-1; i++){			
 			Customer curr = customersComplete.get(i);
@@ -172,7 +201,7 @@ public class Time {
 			}
 			
 		}
-		
+		*/
 		System.out.println(customersComplete.size());
 		System.out.println(customersWaiting.size());
 		System.out.println(total);

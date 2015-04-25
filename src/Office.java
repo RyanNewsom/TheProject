@@ -188,8 +188,8 @@ class Office {
 	protected void runIt(int runTime, int pTime, int qTime, int dTime){
 		LinkedList eventList = new LinkedList();
 		
-		//Time runIt = new Time(runTime, pTime, qTime, dTime);
-		//eventList = runIt.getEventList();
+		Time runIt = new Time(runTime, pTime, qTime, dTime);
+		eventList = runIt.getEventList();
 		//Time to print out all the customer information per Gordons specs to the Log GUI.
 		Log theLog = new Log(eventList);
 		theLog.createLog();
