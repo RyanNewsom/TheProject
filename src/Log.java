@@ -53,9 +53,11 @@ class Log {
 		boolean empty = true;
 		String contents = "";
 		do{
-			Object temp;;
+			//Object temp = events.peek();
+			Customer temp;
 			if(events.size() != 0){
 				temp = events.dequeue();
+				//temp = events.remove();
 				contents += "\n" + temp.toString();
 			}
 			else empty = false;

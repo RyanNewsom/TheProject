@@ -27,9 +27,9 @@ public class Time {
 	private double dTime;
 	
 	//LinkedList<Customer> customersWaiting = new LinkedList<Customer>(); // LinkedList of customers in line
-	PriorityQueue<Object> customersWaiting = new PriorityQueue<Object>();
+	PriorityQueue<Customer> customersWaiting = new PriorityQueue<Customer>();
 	//LinkedList<Customer> customersComplete = new LinkedList<Customer>(); // LinkedList of customers complete
-	PriorityQueue<Object> customersComplete = new PriorityQueue<Object>();
+	PriorityQueue<Customer> customersComplete = new PriorityQueue<Customer>();
 	//LinkedList<Event> eventList = new LinkedList<Event>(); // LinkedList of event objects
 	PriorityQueue<Event> eventList = new PriorityQueue<Event>();
 	
@@ -73,7 +73,7 @@ public class Time {
 		while(currentTime < endTime){
 			System.out.println("loop " + currentTime);
 			System.out.println(customersWaiting.size());
-			Object customer = null;
+			Customer customer = null;
 			
 			getNextEvent(); // get next customer type
 			
@@ -83,7 +83,7 @@ public class Time {
 				
 				currentTime = customerDoorTime;
 				questionTime = getGuestionTimePoisson();
-				Object newCustomer  = new Object(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
+				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
 				event = new Event("Customer came through the door", newCustomer.getName(), currentTime);
 				////////////////////eventList.add(event);
 				eventList.enqueue(event, 1);
@@ -96,7 +96,7 @@ public class Time {
 						continue;
 					}
 					/////////customer = customersWaiting.remove(0);
-					customer = (Object) customersWaiting.dequeue();
+					customer = (Customer) customersWaiting.dequeue();
 					questionTime = customer.getRemaining();
 					System.out.println("customer");
 				}
@@ -106,7 +106,7 @@ public class Time {
 				if((currentTime + questionTime) > customerDoorTime){
 					currentTime = customerDoorTime;
 					double tempQuestionTime = getGuestionTimePoisson();
-					Object tempCustomer  = new Object(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
+					Customer tempCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
 					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
 					/////////////eventList.add(event);
 					eventList.enqueue(event, total);
@@ -152,7 +152,7 @@ public class Time {
 				
 				currentTime = customerCallTime;
 				questionTime = getGuestionTimePoisson();
-				Object newCustomer  = new Object(customerType, currentTime, questionTime, questionTime, 1, customersWaiting.size());
+				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 1, customersWaiting.size());
 				total++;
 				event = new Event("Customer has called.", newCustomer.getName(), currentTime);
 				//////////eventList.add(event);
@@ -161,7 +161,7 @@ public class Time {
 				/////////customersWaiting.add(0, newCustomer);
 				customersWaiting.enqueue(newCustomer, 1);
 				/////////customer = customersWaiting.remove(0);
-				customer = (Object) customersWaiting.dequeue();
+				customer = (Customer) customersWaiting.dequeue();
 				System.out.println("Phone Customer");
 				
 				customerCallTime = customerCallTime + getPhoneCallPoisson();
@@ -170,7 +170,7 @@ public class Time {
 				if((currentTime + questionTime) > customerDoorTime){
 					
 					double tempQuestionTime = getGuestionTimePoisson();
-					Object tempCustomer  = new Object(customerType, customerDoorTime, questionTime, questionTime, 2, customersWaiting.size());
+					Customer tempCustomer  = new Customer(customerType, customerDoorTime, questionTime, questionTime, 2, customersWaiting.size());
 					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
 					///////////eventList.add(event);
 					eventList.enqueue(event, 1);
@@ -292,7 +292,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers waiting in line
 	 */
-	protected PriorityQueue<Object> getCustomersRemaining() {
+	protected PriorityQueue<Customer> getCustomersRemaining() {
 	
 		return customersWaiting;
 	}
@@ -302,7 +302,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers with questions answered
 	 */
-	protected PriorityQueue<Object> getCustomersComplete(){
+	protected PriorityQueue<Customer> getCustomersComplete(){
 		
 		return customersComplete;
 	}

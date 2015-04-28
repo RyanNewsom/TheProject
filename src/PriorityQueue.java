@@ -16,7 +16,7 @@
  * @author Aaron
  * @param <Element>
  */
-public class PriorityQueue<Objectt> {
+public class PriorityQueue<Object> {
     
     private Node<Object> head, current, prev;
     private int size;
