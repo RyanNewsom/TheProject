@@ -7,7 +7,7 @@ import java.util.Random;
  * @author Ryan Newsom
  *
  */
-class Customer {
+class Object {
 	/** Name of the customer */
 	String name;
 	/** Phone-call or walk-in */
@@ -36,7 +36,7 @@ class Customer {
 	 * @param prior - priority of the customer
 	 * @param lineLength - After the customer has their question answered and leaves i.e. don't include this customer in the count
 	 */
-	protected Customer(String type, double sTime, double answerTime, double remainingTime, int prior, int lineLength){
+	protected Object(String type, double sTime, double answerTime, double remainingTime, int prior, int lineLength){
 		Random rand = new Random();// Will be used to generate a random integer
 		int question = rand.nextInt(14);
 		name = Message.getName(rand.nextInt(24));

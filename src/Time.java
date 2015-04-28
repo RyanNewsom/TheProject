@@ -26,9 +26,12 @@ public class Time {
 	private double qTime;
 	private double dTime;
 	
-	LinkedList<Customer> customersWaiting = new LinkedList<Customer>(); // LinkedList of customers in line
-	LinkedList<Customer> customersComplete = new LinkedList<Customer>(); // LinkedList of customers complete
-	LinkedList<Event> eventList = new LinkedList<Event>(); // LinkedList of event objects
+	//LinkedList<Customer> customersWaiting = new LinkedList<Customer>(); // LinkedList of customers in line
+	PriorityQueue<Object> customersWaiting = new PriorityQueue<Object>();
+	//LinkedList<Customer> customersComplete = new LinkedList<Customer>(); // LinkedList of customers complete
+	PriorityQueue<Object> customersComplete = new PriorityQueue<Object>();
+	//LinkedList<Event> eventList = new LinkedList<Event>(); // LinkedList of event objects
+	PriorityQueue<Event> eventList = new PriorityQueue<Event>();
 	
 	/**
 	 * Blank constructor for time class
@@ -70,7 +73,7 @@ public class Time {
 		while(currentTime < endTime){
 			System.out.println("loop " + currentTime);
 			System.out.println(customersWaiting.size());
-			Customer customer = null;
+			Object customer = null;
 			
 			getNextEvent(); // get next customer type
 			
@@ -80,17 +83,20 @@ public class Time {
 				
 				currentTime = customerDoorTime;
 				questionTime = getGuestionTimePoisson();
-				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
+				Object newCustomer  = new Object(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
 				event = new Event("Customer came through the door", newCustomer.getName(), currentTime);
-				eventList.add(event);
+				////////////////////eventList.add(event);
+				eventList.enqueue(event, 1);
 				total++;
-				customersWaiting.add(newCustomer);
+				////////////////////customersWaiting.add(newCustomer);
+				customersWaiting.enqueue(newCustomer, total+2);
 				
 				if(customer == null){
 					if(customersWaiting.size() == 0){
 						continue;
 					}
-					customer = customersWaiting.remove(0);
+					/////////customer = customersWaiting.remove(0);
+					customer = (Object) customersWaiting.dequeue();
 					questionTime = customer.getRemaining();
 					System.out.println("customer");
 				}
@@ -100,14 +106,17 @@ public class Time {
 				if((currentTime + questionTime) > customerDoorTime){
 					currentTime = customerDoorTime;
 					double tempQuestionTime = getGuestionTimePoisson();
-					Customer tempCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
+					Object tempCustomer  = new Object(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
 					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
-					eventList.add(event);
+					/////////////eventList.add(event);
+					eventList.enqueue(event, total);
 					total++;
-					customersWaiting.add(tempCustomer);
+					//customersWaiting.add(tempCustomer);
+					customersWaiting.enqueue(tempCustomer, total+2);
 					customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
 					
 				}
+				
 				//This loop is if a customer is scheduled to call while a door customer question is being answered. 
 				if((currentTime + questionTime) > customerCallTime){
 					
@@ -116,21 +125,25 @@ public class Time {
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
 					System.out.println("Door customer interrupted");
-					customersWaiting.add(customer);
+					///////////////customersWaiting.add(customer);
+					customersWaiting.enqueue(customer, 1);
 					continue;
 					
 				}
+				
 				currentTime = currentTime + customer.getRemaining();
 				customer.setAnswerTime(currentTime);
 				customer.setLineRemainingSize(customersWaiting.size());
-				//customersComplete.add(customer); // add customer to list of completed customers
+				//////////////customersComplete.add(customer); // add customer to list of completed customers
 
 				customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
 				System.out.println("Door Customer complete");
 				System.out.println(customer);
-				customersComplete.add(customer); // add customer to list of completed customers
+				/////////////customersComplete.add(customer); // add customer to list of completed customers
+				customersComplete.enqueue(customer, total);
 				event = new Event("Door Customer question has been answered", customer.getName(), customer.getAnswerTime());
-				eventList.add(event);
+				////////////eventList.add(event);
+				eventList.enqueue(event, 1);
 				
 			}
 			
@@ -139,13 +152,16 @@ public class Time {
 				
 				currentTime = customerCallTime;
 				questionTime = getGuestionTimePoisson();
-				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 1, customersWaiting.size());
+				Object newCustomer  = new Object(customerType, currentTime, questionTime, questionTime, 1, customersWaiting.size());
 				total++;
 				event = new Event("Customer has called.", newCustomer.getName(), currentTime);
-				eventList.add(event);
+				//////////eventList.add(event);
+				eventList.enqueue(event, 1);
 				
-				customersWaiting.add(0, newCustomer);
-				customer = customersWaiting.remove(0);
+				/////////customersWaiting.add(0, newCustomer);
+				customersWaiting.enqueue(newCustomer, 1);
+				/////////customer = customersWaiting.remove(0);
+				customer = (Object) customersWaiting.dequeue();
 				System.out.println("Phone Customer");
 				
 				customerCallTime = customerCallTime + getPhoneCallPoisson();
@@ -154,11 +170,13 @@ public class Time {
 				if((currentTime + questionTime) > customerDoorTime){
 					
 					double tempQuestionTime = getGuestionTimePoisson();
-					Customer tempCustomer  = new Customer(customerType, customerDoorTime, questionTime, questionTime, 2, customersWaiting.size());
+					Object tempCustomer  = new Object(customerType, customerDoorTime, questionTime, questionTime, 2, customersWaiting.size());
 					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
-					eventList.add(event);
+					///////////eventList.add(event);
+					eventList.enqueue(event, 1);
 					total++;
-					customersWaiting.add(tempCustomer);
+					///////////customersWaiting.add(tempCustomer);
+					customersWaiting.enqueue(tempCustomer, total + 2);
 					customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
 					
 				}
@@ -170,7 +188,8 @@ public class Time {
 					currentTime = currentTime + (questionTime-remainingQuestionTime); //get question time - remaining question time
 					customer.setRemaining(remainingQuestionTime); // set customer question time as remaining question time
 					System.out.println("Phone Customer interrupted");
-					customersWaiting.add(0, customer);
+					/////////customersWaiting.add(0, customer);
+					customersWaiting.enqueue(customer, 1);
 					continue;
 					
 				}
@@ -183,9 +202,11 @@ public class Time {
 				customerCallTime = customerCallTime + getPhoneCallPoisson();
 				System.out.println("Phone Customer complete");
 				System.out.println(customer);
-				customersComplete.add(customer); // add customer to list of completed customers
+				///////////customersComplete.add(customer); // add customer to list of completed customers
+				customersComplete.enqueue(customer, total);
 				event = new Event("Phone Customer question has been answered", customer.getName(), customer.getAnswerTime());
-				eventList.add(event);
+				//////////eventList.add(event);
+				eventList.enqueue(event, 1);
 			}
 			
 		}
@@ -206,13 +227,14 @@ public class Time {
 		System.out.println(customersWaiting.size());
 		System.out.println(total);
 		
+		/*
 		int count = 0;
 		for(int i = 0; i< customersComplete.size(); i++){
 			System.out.println(customersComplete.get(i));
 			count++;
 			System.out.println(count);
 		}
-
+		*/
 	 
 	}
 	
@@ -270,10 +292,9 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers waiting in line
 	 */
-	protected LinkedList<Customer> getCustomersRemaining() {
+	protected PriorityQueue<Object> getCustomersRemaining() {
 	
 		return customersWaiting;
-		
 	}
 	
 
@@ -281,7 +302,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of customers with questions answered
 	 */
-	protected LinkedList<Customer> getCustomersComplete(){
+	protected PriorityQueue<Object> getCustomersComplete(){
 		
 		return customersComplete;
 	}
@@ -290,7 +311,7 @@ public class Time {
 	 * 
 	 * @return LinkedList of events
 	 */
-	protected LinkedList<Event> getEventList(){
+	protected PriorityQueue<Event> getEventList(){
 		
 		return eventList;
 	}

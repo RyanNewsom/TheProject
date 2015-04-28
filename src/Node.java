@@ -4,11 +4,11 @@
  */
 public class Node {
     
-    private Object data;
+    private Customer data;
     private Node next;
     private int priority;
 
-    public Node (Object data, Node next, int priority) {
+    public Node (Customer data, Node next, int priority) {
         this.data = data;
         this.next = next;
         this.priority = priority; 
@@ -22,7 +22,7 @@ public class Node {
         this.priority = priority;
     }
     
-    public void setData(Object data) {
+    public void setData(Customer data) {
     	this.data = data;
     }
 		
@@ -34,7 +34,7 @@ public class Node {
     	return next;
     }
     
-    public Object getData() {
+    public Customer getData() {
     	return data;
     }
 }

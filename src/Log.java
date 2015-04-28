@@ -16,14 +16,14 @@ import com.sun.corba.se.impl.orbutil.graph.Node;
  */
 class Log {
 	/** This linked list contains all the customers that had questions that were answered */
-	LinkedList events; 
+	PriorityQueue events; 
 	
 	/**
 	 * Creates a log which will need to access information from two separate Linked Lists
 	 * @param before - all the customers that had questions that were answered
 	 * @param atEndTime - all the customers who are still in line after the office simulation ends 
 	 */
-	protected Log(LinkedList events){
+	protected Log(PriorityQueue events){
 		this.events = events;
 	}
 	
@@ -53,9 +53,9 @@ class Log {
 		boolean empty = true;
 		String contents = "";
 		do{
-			Object temp = events.peek();
-			if(temp!=null){
-				temp = events.remove();
+			Object temp;;
+			if(events.size() != 0){
+				temp = events.dequeue();
 				contents += "\n" + temp.toString();
 			}
 			else empty = false;

@@ -186,7 +186,7 @@ class Office {
 	 * @param dTime
 	 */
 	protected void runIt(int runTime, int pTime, int qTime, int dTime){
-		LinkedList eventList = new LinkedList();
+		PriorityQueue eventList = new PriorityQueue<>();
 		
 		Time runIt = new Time(runTime, pTime, qTime, dTime);
 		eventList = runIt.getEventList();
