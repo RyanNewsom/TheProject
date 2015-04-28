@@ -18,7 +18,7 @@
  */
 public class PriorityQueue<Object> {
     
-    private Node<Object> head, current, prev;
+    private Node head, current, prev;
     private int size;
     
     /**
@@ -125,7 +125,7 @@ public class PriorityQueue<Object> {
             }
         }
         size--;                         
-        return current;                    
+        return (Object) current.getData();                    
     }
 }
 

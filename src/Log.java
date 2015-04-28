@@ -16,7 +16,7 @@ import com.sun.corba.se.impl.orbutil.graph.Node;
  */
 class Log {
 	/** This linked list contains all the customers that had questions that were answered */
-	PriorityQueue events; 
+	PriorityQueue<Customer> events; 
 	
 	/**
 	 * Creates a log which will need to access information from two separate Linked Lists

@@ -106,7 +106,7 @@ public class Time {
 				if((currentTime + questionTime) > customerDoorTime){
 					currentTime = customerDoorTime;
 					double tempQuestionTime = getGuestionTimePoisson();
-					Customer tempCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
+					Customer tempCustomer  = new Customer(customerType, currentTime, tempQuestionTime, tempQuestionTime, 2, customersWaiting.size());
 					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
 					/////////////eventList.add(event);
 					eventList.enqueue(event, total);
@@ -170,7 +170,7 @@ public class Time {
 				if((currentTime + questionTime) > customerDoorTime){
 					
 					double tempQuestionTime = getGuestionTimePoisson();
-					Customer tempCustomer  = new Customer(customerType, customerDoorTime, questionTime, questionTime, 2, customersWaiting.size());
+					Customer tempCustomer  = new Customer(customerType, customerDoorTime, tempQuestionTime, tempQuestionTime, 2, customersWaiting.size());
 					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
 					///////////eventList.add(event);
 					eventList.enqueue(event, 1);
