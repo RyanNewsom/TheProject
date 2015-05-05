@@ -44,10 +44,20 @@ public class Event {
 	    int totalMinutes = totalSeconds / SECONDS_IN_A_MINUTE;
 	    int minutes = totalMinutes % MINUTES_IN_AN_HOUR;
 	    int hours = totalMinutes / MINUTES_IN_AN_HOUR;
-
+	    
+	    String secondsString;
+	    String minutesString;
+	    String hoursString;
+	    
+	    if(seconds<10) secondsString = "0" + seconds;
+	    else secondsString = "" + seconds;
+	    if(seconds<10) minutesString = "0" + minutes;
+	    else minutesString = "" + minutes;
+	    if(seconds<10) hoursString = "0" + hours;
+	    else hoursString = "" + hours;
 	    if (seconds <10)
 	    	seconds += 0;
-	    return hours + ":" + minutes + ":" + seconds;
+	    return hoursString + ":" + minutesString + ":" + secondsString;
 	}
 	
 	
