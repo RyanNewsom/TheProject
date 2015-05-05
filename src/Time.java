@@ -101,9 +101,18 @@ public class Time {
 					System.out.println("customer");
 				}
 				customerDoorTime = customerDoorTime + getDoorArrivalPoisson();
+				if((currentTime + questionTime) > endTime){
+					customersWaiting.enqueue(customer, 1);
+					currentTime = endTime;
+					continue;
+				}
 				
 				//This loop is if a customer is scheduled to walk through the door while a customer door customer question is being answered. 
 				if((currentTime + questionTime) > customerDoorTime){
+					if(customerDoorTime > endTime){
+						currentTime = endTime;
+						continue;
+					}
 					currentTime = customerDoorTime;
 					double tempQuestionTime = getGuestionTimePoisson();
 					Customer tempCustomer  = new Customer(customerType, currentTime, tempQuestionTime, tempQuestionTime, 2, customersWaiting.size());
@@ -165,9 +174,18 @@ public class Time {
 				System.out.println("Phone Customer");
 				
 				customerCallTime = customerCallTime + getPhoneCallPoisson();
+				if((currentTime + questionTime) > endTime){
+					customersWaiting.enqueue(customer, 1);
+					currentTime = endTime;
+					continue;
+				}
 				
 				//This loop is if a customer is scheduled to walk through the door while a customer door customer question is being answered. 
 				if((currentTime + questionTime) > customerDoorTime){
+					if(customerDoorTime > endTime){
+						currentTime = endTime;
+						continue;
+					}
 					
 					double tempQuestionTime = getGuestionTimePoisson();
 					Customer tempCustomer  = new Customer(customerType, customerDoorTime, tempQuestionTime, tempQuestionTime, 2, customersWaiting.size());
@@ -207,6 +225,11 @@ public class Time {
 				event = new Event("'s question has been answered", customer.getName(), customer.getAnswerTime(), customersWaiting.size());
 				//////////eventList.add(event);
 				eventList.enqueue(event, 1);
+			}
+			
+			//check to break out of loop
+			if(customerDoorTime  > endTime || customerCallTime  > endTime){
+				currentTime = endTime;
 			}
 			
 		}
