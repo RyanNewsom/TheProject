@@ -18,11 +18,12 @@ public class Event {
 	 * @param name - The name of the customer
 	 * @param time - The time the event occurred
 	 */
-	protected Event(String type, String name, double time)
+	protected Event(String type, String name, double time, int lineLength)
 	{
 		this.type = type;
 		this.name = name;
 		this.time = time;
+		this.lineLength = lineLength;
 	}
 	
 	public String toString(){
