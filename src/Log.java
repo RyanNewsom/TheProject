@@ -56,9 +56,9 @@ class Log {
 			//Object temp = events.peek();
 			Event temp;
 			if(events.size() != 0){
-				temp = events.dequeue();
+				temp = events.dequeueFinal();
 				//temp = events.remove();
-				contents += "\n" + temp.toString();
+				contents += temp.toString() + "\n";
 			}
 			else empty = false;
 		}while(empty);

@@ -127,5 +127,16 @@ public class PriorityQueue<Object> {
         size--;                         
         return (Object) current.getData();                    
     }
+    /**
+     * This will be used for getting information from the event list. If it pulls w/ priority it jacks up the order.
+     * @return Object - The data in the current Node.
+     */
+    public Object dequeueFinal(){                   
+    	current = head;            
+        head = head.getNext();  
+        size--;                         
+        return (Object) current.getData();    
+    }
 }
+    
 
