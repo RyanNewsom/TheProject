@@ -192,7 +192,6 @@ class Office {
 		eventList = runIt.getEventList();
 		//Time to print out all the customer information per Gordons specs to the Log GUI.
 		Log theLog = new Log(eventList);
-		theLog.createLog();
-		
+		theLog.createLog();	
 	}
 }

@@ -84,7 +84,7 @@ public class Time {
 				currentTime = customerDoorTime;
 				questionTime = getGuestionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 2, customersWaiting.size());
-				event = new Event("Customer came through the door", newCustomer.getName(), currentTime);
+				event = new Event(" came through the door", newCustomer.getName(), currentTime);
 				////////////////////eventList.add(event);
 				eventList.enqueue(event, 1);
 				total++;
@@ -107,7 +107,7 @@ public class Time {
 					currentTime = customerDoorTime;
 					double tempQuestionTime = getGuestionTimePoisson();
 					Customer tempCustomer  = new Customer(customerType, currentTime, tempQuestionTime, tempQuestionTime, 2, customersWaiting.size());
-					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
+					event = new Event(" came through the door", tempCustomer.getName(), currentTime);
 					/////////////eventList.add(event);
 					eventList.enqueue(event, total);
 					total++;
@@ -141,7 +141,7 @@ public class Time {
 				System.out.println(customer);
 				/////////////customersComplete.add(customer); // add customer to list of completed customers
 				customersComplete.enqueue(customer, total);
-				event = new Event("Door Customer question has been answered", customer.getName(), customer.getAnswerTime());
+				event = new Event("'s question has been answered", customer.getName(), customer.getAnswerTime());
 				////////////eventList.add(event);
 				eventList.enqueue(event, 1);
 				
@@ -154,7 +154,7 @@ public class Time {
 				questionTime = getGuestionTimePoisson();
 				Customer newCustomer  = new Customer(customerType, currentTime, questionTime, questionTime, 1, customersWaiting.size());
 				total++;
-				event = new Event("Customer has called.", newCustomer.getName(), currentTime);
+				event = new Event(" called", newCustomer.getName(), currentTime);
 				//////////eventList.add(event);
 				eventList.enqueue(event, 1);
 				
@@ -171,7 +171,7 @@ public class Time {
 					
 					double tempQuestionTime = getGuestionTimePoisson();
 					Customer tempCustomer  = new Customer(customerType, customerDoorTime, tempQuestionTime, tempQuestionTime, 2, customersWaiting.size());
-					event = new Event("Customer came through the door", tempCustomer.getName(), currentTime);
+					event = new Event(" came through the door", tempCustomer.getName(), currentTime);
 					///////////eventList.add(event);
 					eventList.enqueue(event, 1);
 					total++;
@@ -204,7 +204,7 @@ public class Time {
 				System.out.println(customer);
 				///////////customersComplete.add(customer); // add customer to list of completed customers
 				customersComplete.enqueue(customer, total);
-				event = new Event("Phone Customer question has been answered", customer.getName(), customer.getAnswerTime());
+				event = new Event("'s question has been answered", customer.getName(), customer.getAnswerTime());
 				//////////eventList.add(event);
 				eventList.enqueue(event, 1);
 			}

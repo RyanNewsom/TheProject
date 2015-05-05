@@ -26,7 +26,7 @@ public class Event {
 	}
 	
 	public String toString(){
-		return "" + type + " " + name + " " + timeConversion((int) time);
+		return name  + type + " " +  "at " + timeConversion((int) time);
 	}
 	
 	/**
