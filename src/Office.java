@@ -1,10 +1,13 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -34,10 +37,10 @@ class Office {
 	protected Office(){
 		JFrame frame = new JFrame("Just another day at the office...");
 		JLabel title = new JLabel("An Office Simulation");
-		JLabel simTime = new JLabel("Time for office simulation: ");
-		JLabel labelP = new JLabel("Average time for a new customer phone call: ");
-		JLabel labelD = new JLabel("Average time for a new walk in customer: ");
-		JLabel labelQ = new JLabel("Average time for secretary to answer a question: ");
+		JLabel simTime = new JLabel("Time for office simulation: (minutes) ");
+		JLabel labelP = new JLabel("Average time for a new customer phone call: (seconds) ");
+		JLabel labelD = new JLabel("Average time for a new walk in customer: (seconds) ");
+		JLabel labelQ = new JLabel("Average time for secretary to answer a question: (seconds) ");
 		File file = new File("workaholics.jpg");
 		JTextField titleInput = new JTextField(20);
 		JTextField timeP = new JTextField(20);
@@ -45,7 +48,7 @@ class Office {
 		JTextField timeD = new JTextField(20);
 		JButton go = new JButton("GO");
 		Font largeFont = new Font("SANS_SERIF", 1, 50);
-		Font mediumFont = new Font("SANS_SERIF", 0, 30);
+		Font mediumFont = new Font("SANS_SERIF", 0, 27);
 		Font smallFont = new Font("SANS_SERIF", 0, 20);
 		Color grayl = new Color(0, 0, 0);
 		Image background = null;
@@ -59,26 +62,55 @@ class Office {
 		frame.setBounds(200,200,1080,700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(j);
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		
 		j.setLayout(new GridBagLayout());
 		
 		title.setFont(largeFont);
 		title.setForeground(grayl);
 		simTime.setFont(mediumFont);
-		simTime.setForeground(Color.BLUE);
+		simTime.setForeground(Color.MAGENTA);
 		labelP.setFont(mediumFont);
-		labelP.setForeground(Color.BLUE);
+		labelP.setForeground(Color.MAGENTA);
 		labelQ.setFont(mediumFont);
-		labelQ.setForeground(Color.BLUE);
+		labelQ.setForeground(Color.MAGENTA);
 		labelD.setFont(mediumFont);
-		labelD.setForeground(Color.BLUE);
+		labelD.setForeground(Color.MAGENTA);
+		
 		
 		titleInput.setFont(smallFont);
 		timeP.setFont(smallFont);
 		timeQ.setFont(smallFont);
 		timeD.setFont(smallFont);
 		
+		
 		go.setFont(largeFont);
+		go.setFocusPainted(true);
+		
+        titleInput.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                titleInput.setText("");
+            }
+        });
+        timeP.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                timeP.setText("");
+            }
+        });
+        timeQ.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                timeQ.setText("");
+            }
+        });
+        timeD.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                timeD.setText("");
+            }
+        });
 		go.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try{
