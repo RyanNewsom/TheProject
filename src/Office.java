@@ -175,7 +175,8 @@ class Office {
 		frame.setVisible(true);
 	}
 	/**
-	 * Runs the program itself
+	 * Runs the necessary classes for the office simulation whenever the GO JButton is clicked.
+	 *
 	 * @param runTime - The time to run the office simulation
 	 * @param pTime - Time it takes for a new phone customer to arrive
 	 * @param qTime - Time it takes to answer a question
@@ -184,10 +185,11 @@ class Office {
 	protected void runIt(int runTime, int pTime, int qTime, int dTime){
 		PriorityQueue eventList = new PriorityQueue<>();
 		
-		Time runIt = new Time(runTime, pTime, qTime, dTime);
-		eventList = runIt.getEventList();
-		//Time to print out all the customer information per Gordons specs to the Log GUI.
-		Log theLog = new Log(eventList);
-		theLog.createLog();	
+		Time runIt = new Time(runTime, pTime, qTime, dTime); // Runs the office simulation and will generate a PriorityQueue
+		eventList = runIt.getEventList(); // Getting the priority queue w/ all the events that have happened
+		Log theLog = new Log(eventList); // The Log class will print out all the event information in a new JFrame
+		theLog.createLog();	// Tells the Log to create a JFrame
+							// *HERE* We will create a JTable Class object and pass it two priorityqueues of customers 
+		//It will then show the contents in a JTable. i.e.(AaronsTable theTable = new AaronsTable(PriorityQueue1, PriorityQueue2);
 	}
 }

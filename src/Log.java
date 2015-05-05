@@ -33,11 +33,8 @@ class Log {
 	protected void createLog()
 	{
 		JFrame frame = new JFrame("Today at the office...");
-		//JPanel panel = new IPanel();
 		JTextArea textArea = new JTextArea("Results go here.");
 		JScrollPane scrollPane = new JScrollPane(textArea);
-		JTable table = new JTable();
-		//table.setValueAt("asdasd", row, column);
 		
 		textArea.setSize(500, 500);
 		textArea.setEditable(false);
@@ -53,11 +50,9 @@ class Log {
 		boolean empty = true;
 		String contents = "";
 		do{
-			//Object temp = events.peek();
 			Event temp;
 			if(events.size() != 0){
 				temp = events.dequeueFinal();
-				//temp = events.remove();
 				contents += temp.toString() + "\n";
 			}
 			else empty = false;

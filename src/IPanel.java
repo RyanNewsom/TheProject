@@ -1,6 +1,6 @@
 /**
  * This class is for creating a JPanel with an image as the background
- * @author someone I am very thankful for
+ * @author someone I am very thankful for i.e. Unknown
  */
 import java.awt.Graphics;
 import java.awt.Image;

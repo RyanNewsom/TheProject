@@ -24,7 +24,7 @@ class Customer {
 	String answer;
 	/** The customers priority */
 	int priority; 
-	/** The length of the line after the customer is done with their question */
+	/** The length of the line after the event */
 	int lineLength;
 	
 	/**
@@ -34,12 +34,12 @@ class Customer {
 	 * @param sTime - start time formatted as such 00:00:00 i.e. (H:M:S)
 	 * @param answerTime - answer time formatted as such 00:00:00 i.e. (H:M:S)
 	 * @param prior - priority of the customer
-	 * @param lineLength - After the customer has their question answered and leaves i.e. don't include this customer in the count
+	 * @param lineLength - Length of the line after the event
 	 */
 	protected Customer(String type, double sTime, double answerTime, double remainingTime, int prior, int lineLength){
 		Random rand = new Random();// Will be used to generate a random integer
 		int question = rand.nextInt(14);
-		name = Message.getName(rand.nextInt(24));
+		name = Message.getName(rand.nextInt(37));
 		this.type = type;
 		this.startTime = sTime;
 		this.answerTime = answerTime;

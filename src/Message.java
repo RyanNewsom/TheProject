@@ -5,7 +5,7 @@
  */
 class Message {
 	/**
-	 * Generate a message for the customer to ask.
+	 * Generates a message for the customer to ask.
 	 * @param theQuestion - this should be a randomly generated int from 0-14 on YOUR end.
 	 * @return - The question the customer has
 	 */
@@ -87,7 +87,7 @@ class Message {
 			return answer;
 		}
 		/**
-		 * Picks a customer name between int range 0-25 basd off what is passed and returns it
+		 * Picks a customer name between int range 0-36 based off what is passed and returns it
 		 * @param randomInt - a randomly generated int which will pick a name
 		 * @return - a randomly generated name
 		 */
@@ -142,7 +142,31 @@ class Message {
 						break;
 				case 23:name = "Trish";
 						break;
-				case 24:name = "Bieber";
+				case 24:name = "Justin Bieber";
+						break;
+				case 25:name = "Tapioca";
+						break;
+				case 26:name = "Paris";
+						break;
+				case 27:name = "Bruce";
+						break;
+				case 28:name = "Latifah";
+						break;
+				case 29:name = "Bonifa";
+						break;
+				case 30:name = "Sha'Nay Nay";
+						break;
+				case 31:name = "Obamaniqua";
+						break;
+				case 32:name = "Dixie";
+						break;
+				case 33:name = "Brownie";
+						break;
+				case 34:name = "Bentley";
+						break;
+				case 35:name = "Porsche";
+						break;
+				case 36:name = "Mufisa";
 						break;
 				}
 			return name;
