@@ -27,7 +27,7 @@ public class Event {
 	}
 	
 	public String toString(){
-		return name  + type + " " +  "at " + timeConversion((int) time) + "the line has " + lineLength + "customers after this.";
+		return name  + type + " " +  "at " + timeConversion((int) time) + ". The line has " + lineLength + " customers after this.";
 	}
 	
 	/**

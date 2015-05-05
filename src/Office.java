@@ -17,12 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 /**
- * This class will facilitate running the program itself and bring everything together. The flow will be as such
- * 1) Kris will keep track of the times and create all the customer objects using two LinkedLists.
- * 2) Once the Time class has ran through the simulation, I will grab both linked lists from it.
- * 3) Then, the log class will be called and the timline of events will be printed in the Log's JFrame.
+ * Bring the necessary class's together for the group assignment and run's the simulation andprints out results using 
+ * the different gui's: Log, Table
  * @author Ryan Newsom
- * @version 1
+ * @version 2
  */
 class Office {
 
@@ -56,10 +54,8 @@ class Office {
 			background = ImageIO.read(file);
 		} catch (IOException e) {
 			System.out.println("Image load failed");
-			// Some Error Handling in the future
 		}
 		final JPanel j = new IPanel(background);
-		//frame.setResizable(false);
 		frame.setBounds(200,200,1080,700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(j);
@@ -180,10 +176,10 @@ class Office {
 	}
 	/**
 	 * Runs the program itself
-	 * @param runTime
-	 * @param pTime
-	 * @param qTime
-	 * @param dTime
+	 * @param runTime - The time to run the office simulation
+	 * @param pTime - Time it takes for a new phone customer to arrive
+	 * @param qTime - Time it takes to answer a question
+	 * @param dTime - Time it takes for a new door customer to arrive
 	 */
 	protected void runIt(int runTime, int pTime, int qTime, int dTime){
 		PriorityQueue eventList = new PriorityQueue<>();
