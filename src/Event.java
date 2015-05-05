@@ -51,12 +51,11 @@ public class Event {
 	    
 	    if(seconds<10) secondsString = "0" + seconds;
 	    else secondsString = "" + seconds;
-	    if(seconds<10) minutesString = "0" + minutes;
+	    if(minutes<10) minutesString = "0" + minutes;
 	    else minutesString = "" + minutes;
-	    if(seconds<10) hoursString = "0" + hours;
+	    if(hours<10) hoursString = "0" + hours;
 	    else hoursString = "" + hours;
-	    if (seconds <10)
-	    	seconds += 0;
+
 	    return hoursString + ":" + minutesString + ":" + secondsString;
 	}
 	
