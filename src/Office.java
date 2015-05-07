@@ -79,10 +79,13 @@ class Office {
 		
 		
 		titleInput.setFont(smallFont);
+		titleInput.setText("50");
 		timeP.setFont(smallFont);
+		timeP.setText("55");
 		timeQ.setFont(smallFont);
+		timeQ.setText("24");
 		timeD.setFont(smallFont);
-		
+		timeD.setText("45");
 		
 		go.setFont(largeFont);
 		go.setFocusPainted(true);
