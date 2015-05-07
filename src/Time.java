@@ -14,21 +14,19 @@
 
 public class Time {
 
-	private double currentTime = 0;
-	private double endTime = 0;
-	private double customerDoorTime = 0;
-	private double questionTime = Double.MAX_VALUE;
-	private double customerCallTime = 0;
-	private String customerType;
-	private double pTime;
-	private double qTime;
-	private double dTime;
+	private double currentTime = 0;					//Initial end time simulation value in seconds.
+	private double endTime = 0;						//Initial end time simulation value in seconds.
+	private double customerDoorTime = 0;			//initial customer door time value in seconds
+	private double questionTime = Double.MAX_VALUE; //initial question time value in seconds
+	private double customerCallTime = 0;			//initial customer call time value in seconds
+	private String customerType;					//string of the customer type
+	private double pTime; 							//mean phone customer time
+	private double qTime;							//mean question time
+	private double dTime;							//mean door customer time
 	
-	//LinkedList<Customer> customersWaiting = new LinkedList<Customer>(); // LinkedList of customers in line
+	//PriorityQueues of customers waiting, customers completed, and events created
 	PriorityQueue<Customer> customersWaiting = new PriorityQueue<Customer>();
-	//LinkedList<Customer> customersComplete = new LinkedList<Customer>(); // LinkedList of customers complete
 	PriorityQueue<Customer> customersComplete = new PriorityQueue<Customer>();
-	//LinkedList<Event> eventList = new LinkedList<Event>(); // LinkedList of event objects
 	PriorityQueue<Event> eventList = new PriorityQueue<Event>();
 	
 	/**
@@ -39,15 +37,18 @@ public class Time {
 	}
 	
 	/**
+	 * Main constructor for the time class. takes an end time in minutes, mean door customer
+	 * phone customer, and question time, and starts the office simulation.
 	 * 
-	 * @param endTime - double of end time simulation
+	 * @param endTime - double of end time simulation in minutes
 	 * @param pTime - double for calculating mean phone call time
 	 * @param qTime - double for calculating mean question time
 	 * @param dTime - double for calculating mean door time
 	 */
 	public Time(double endTime, double pTime, double qTime, double dTime){
 		
-		this.endTime = (endTime * 60); // convert minutes to seconds
+		 // convert minutes to seconds
+		this.endTime = (endTime * 60);
 		this.qTime = qTime;
 		this.pTime = pTime;
 		this.dTime = dTime;
@@ -61,7 +62,7 @@ public class Time {
 		
 		int total = 0;									//counts total customer amount
 		int doorTotal = 0;								//counts door customer amount
-		int phoneTotal = 0;									//counts phone customer amount
+		int phoneTotal = 0;								//counts phone customer amount
 		customerCallTime = getPhoneCallPoisson();		//generate first customer phone time
 		customerDoorTime = getDoorArrivalPoisson();		//generate first customer door time
 		questionTime = Double.MAX_VALUE;				//question time 
@@ -272,6 +273,7 @@ public class Time {
 			
 		}
 
+		//used for testing
 		System.out.println("Customers helped is " + customersComplete.size());
 		System.out.println("Customers still ine line is " + customersWaiting.size());
 		System.out.println("Total customers is " + total);
@@ -332,7 +334,7 @@ public class Time {
 
 	/**
 	 * 
-	 * @return LinkedList of customers waiting in line
+	 * @return PriorityQueue of customers waiting in line
 	 */
 	protected PriorityQueue<Customer> getCustomersRemaining() {
 	
@@ -342,7 +344,7 @@ public class Time {
 
 	/**
 	 * 
-	 * @return LinkedList of customers with questions answered
+	 * @return PriorityQueue of customers with questions answered
 	 */
 	protected PriorityQueue<Customer> getCustomersComplete(){
 		
@@ -351,7 +353,7 @@ public class Time {
 	
 	/**
 	 * 
-	 * @return LinkedList of events
+	 * @return PriorityQueue of events
 	 */
 	protected PriorityQueue<Event> getEventList(){
 		
