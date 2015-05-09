@@ -1,11 +1,9 @@
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.*;
+import javax.swing.table.TableCellRenderer;
 
 /**
  * This class will create a nice table, in which we will display information on
@@ -15,8 +13,9 @@ import javax.swing.table.*;
  */
 public class InfoTable extends JFrame {
     
-    JTable table; 
-    
+    final JTable table; 
+    final JScrollPane scroll;
+    final int bSize, aSize, numRows;
     /**
      * 
      * @param served - Customers served during Office Simulation
@@ -24,9 +23,9 @@ public class InfoTable extends JFrame {
      */
     public InfoTable(PriorityQueue served, PriorityQueue leftAfterClose) {
         
-        int bSize = served.size();
-        int aSize = leftAfterClose.size();
-        int numRows = bSize + aSize;
+        bSize = served.size();
+        aSize = leftAfterClose.size();
+        numRows = bSize + aSize;
         
         String[] columnNames = {"Name","Type of Customer","Start Time","End Time",
                             "Querie","Answer","Priority","Remaining customers"};
@@ -66,10 +65,12 @@ public class InfoTable extends JFrame {
         // creating the table
         table = new JTable(rows, columnNames) {
             // disabling cell editing
+            @Override
             public boolean isCellEditable(int rows, int columns) {
                 return false;
             }
             // coloring the rows of the table
+            @Override
             public Component prepareRenderer(TableCellRenderer r, int rows, int columns) {
                 Component c = super.prepareRenderer(r, rows, columns);
                 
@@ -81,13 +82,14 @@ public class InfoTable extends JFrame {
                 return c;
             }
             // setting the scroll size for the table in its window
+            @Override
             public boolean getScrollableTracksViewportWidth() {
                 return getPreferredSize().width < getParent().getWidth();
             }
         };
         
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        JScrollPane scroll = new JScrollPane(table);
+        table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
+        scroll = new JScrollPane(table);
         getContentPane().add(scroll);
     }
 }
