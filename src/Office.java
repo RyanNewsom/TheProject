@@ -226,5 +226,8 @@ class Office {
 		theLog.createLog();	// Tells the Log to create a JFrame
 							// *HERE* We will create a JTable Class object and pass it two priorityqueues of customers 
 		//It will then show the contents in a JTable. i.e.(AaronsTable theTable = new AaronsTable(PriorityQueue1, PriorityQueue2);
+                
+                InfoTable theTable = new InfoTable(runIt.getCustomersComplete(), runIt.getCustomersRemaining());
+                
 	}
 }

@@ -91,6 +91,25 @@ class Customer {
 	protected double getRemaining(){
 		return remainingTime;
 	}
+        protected String getType(){
+		return type;
+	}
+        
+        protected String getPhrase(){
+		return phrase;
+	}
+        
+        protected String getAnswer(){
+		return answer;
+	}
+	
+        protected String getPriority(){
+		return "" + priority;
+	}
+        
+        protected String getLineLength(){
+		return "" + lineLength;
+	}
 	/**
 	 * Returns the start time nicely formatted
 	 * @return - the start time 
@@ -131,7 +150,18 @@ class Customer {
 	    int totalMinutes = totalSeconds / SECONDS_IN_A_MINUTE;
 	    int minutes = totalMinutes % MINUTES_IN_AN_HOUR;
 	    int hours = totalMinutes / MINUTES_IN_AN_HOUR;
+	    
+	    String secondsString;
+	    String minutesString;
+	    String hoursString;
+	    
+	    if(seconds<10) secondsString = "0" + seconds;
+	    else secondsString = "" + seconds;
+	    if(minutes<10) minutesString = "0" + minutes;
+	    else minutesString = "" + minutes;
+	    if(hours<10) hoursString = "0" + hours;
+	    else hoursString = "" + hours;
 
-	    return hours + ":" + minutes + ":" + seconds + ":";
+	    return hoursString + ":" + minutesString + ":" + secondsString;
 	}
 }
