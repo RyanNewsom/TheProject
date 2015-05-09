@@ -228,6 +228,8 @@ class Office {
 		//It will then show the contents in a JTable. i.e.(AaronsTable theTable = new AaronsTable(PriorityQueue1, PriorityQueue2);
                 
                 InfoTable theTable = new InfoTable(runIt.getCustomersComplete(), runIt.getCustomersRemaining());
-                
+                theTable.pack();
+                theTable.setSize(700, 300);
+                theTable.setVisible(true);
 	}
 }
